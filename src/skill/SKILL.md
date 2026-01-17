@@ -1,3 +1,13 @@
+---
+name: swiftui-skills
+description: Apple-authored SwiftUI and platform guidance extracted from Xcode. Helps AI agents write idiomatic, Apple-native SwiftUI with reduced hallucinations.
+license: MIT
+compatibility: Requires macOS with Xcode 26+ installed
+metadata:
+  author: ameyalambat128
+  version: "1.0"
+---
+
 # swiftui-skills
 
 ## What this is
