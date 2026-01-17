@@ -64,7 +64,7 @@ export default function Home() {
   const installCommand = "curl -fsSL https://swiftui-skills.ameyalambat.com/install | bash";
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden antialiased bg-grid">
+    <div className="relative min-h-screen overflow-x-hidden">
       {/* Main Content Container */}
       <div className="mx-6 max-w-4xl lg:mx-auto">
         {/* Header / Hero */}
