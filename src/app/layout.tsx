@@ -14,7 +14,42 @@ const ibmPlexSans = IBM_Plex_Sans({
 export const metadata: Metadata = {
   title: "/swiftui-skills",
   description:
-    "Apple-authored SwiftUI and Apple platform guidance, packaged as skills for AI coding agents.",
+    "Apple-authored SwiftUI and platform guidance, packaged as skills for AI coding agents. Local install. No telemetry.",
+  keywords: [
+    "SwiftUI",
+    "AI",
+    "coding agent",
+    "Claude Code",
+    "Cursor",
+    "Apple",
+    "Xcode",
+    "iOS",
+    "macOS",
+    "visionOS",
+  ],
+  authors: [{ name: "Ameya Lambat", url: "https://ameyalambat.com" }],
+  creator: "Ameya Lambat",
+  metadataBase: new URL("https://swiftui-skills.ameyalambat.com"),
+  openGraph: {
+    title: "/swiftui-skills",
+    description:
+      "Apple-authored SwiftUI and platform guidance, packaged as skills for AI coding agents.",
+    url: "https://swiftui-skills.ameyalambat.com",
+    siteName: "/swiftui-skills",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "/swiftui-skills",
+    description:
+      "Apple-authored SwiftUI and platform guidance, packaged as skills for AI coding agents.",
+    creator: "@ameyalambat",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
