@@ -38,6 +38,14 @@ export const metadata: Metadata = {
     siteName: "/swiftui-skills",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 3549,
+        height: 2148,
+        alt: "/swiftui-skills - Agent Skills for SwiftUI",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -45,6 +53,7 @@ export const metadata: Metadata = {
     description:
       "Agent skills for SwiftUI, built from Apple's Xcode AI documentation.",
     creator: "@lambatameya",
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
