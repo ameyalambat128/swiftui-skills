@@ -22,7 +22,7 @@ print_success() {
 }
 
 echo ""
-echo -e "${BLUE}swiftui-skills${NC} uninstaller"
+echo -e "${BLUE}/swiftui-skills${NC} uninstaller"
 echo ""
 
 # Remove Claude Code symlink

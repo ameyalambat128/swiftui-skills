@@ -70,7 +70,7 @@ export default function Home() {
         {/* Header / Hero */}
         <header className="py-16 lg:py-24">
           <h1 className="text-3xl font-bold tracking-tight gradient-text">
-            swiftui-skills
+            /swiftui-skills
           </h1>
 
           <p className="mt-4 text-lg text-gray-100">
@@ -80,7 +80,7 @@ export default function Home() {
           </p>
 
           <p className="mt-6 leading-relaxed text-gray-400">
-            swiftui-skills extracts internal Apple documentation shipped inside Xcode
+            /swiftui-skills extracts internal Apple documentation shipped inside Xcode
             and turns it into reusable skills that help AI agents write idiomatic,
             Apple-native SwiftUI code.
           </p>
@@ -97,7 +97,7 @@ export default function Home() {
             </div>
             <div className="pt-4 mt-4 border-t border-neutral-800 text-gray-500">
               <span className="select-none text-gray-600">&gt; </span>
-              swiftui-skills
+              /swiftui-skills
             </div>
           </div>
           <p className="mt-3 text-sm text-gray-600">
@@ -120,12 +120,12 @@ export default function Home() {
         <main className="space-y-12">
           {/* What is swiftui-skills? */}
           <section>
-            <h2 className="mb-4 text-xl font-bold gradient-text">What is swiftui-skills?</h2>
+            <h2 className="mb-4 text-xl font-bold gradient-text">What is /swiftui-skills?</h2>
             <p className="mb-4 leading-relaxed text-gray-400">
               SwiftUI is opinionated. Most AI agents don&apos;t know those opinions.
             </p>
             <p className="mb-6 leading-relaxed text-gray-400">
-              swiftui-skills is a collection of skills built from Apple-authored
+              /swiftui-skills is a collection of skills built from Apple-authored
               documentation that ships inside Xcode. These skills condition AI agents
               to follow the same patterns Apple expects in real SwiftUI apps.
             </p>
@@ -151,7 +151,7 @@ export default function Home() {
               Apple already solved this internally.
             </p>
             <p className="leading-relaxed text-gray-400">
-              swiftui-skills makes that guidance usable.
+              /swiftui-skills makes that guidance usable.
             </p>
           </section>
 
@@ -233,7 +233,7 @@ export default function Home() {
           <section>
             <h2 className="mb-4 text-xl font-bold gradient-text">Open source</h2>
             <p className="mb-4 leading-relaxed text-gray-400">
-              swiftui-skills is open source.
+              /swiftui-skills is open source.
             </p>
             <p className="mb-6 leading-relaxed text-gray-400">
               The skill definitions, prompts, and installer are public.

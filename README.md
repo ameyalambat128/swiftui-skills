@@ -1,4 +1,4 @@
-# swiftui-skills
+# /swiftui-skills
 
 Apple-authored SwiftUI and Apple platform guidance, packaged as skills for AI coding agents.
 
@@ -6,7 +6,7 @@ Apple-authored SwiftUI and Apple platform guidance, packaged as skills for AI co
 
 SwiftUI is opinionated. Most AI agents don't know those opinions.
 
-swiftui-skills extracts internal Apple documentation shipped inside Xcode and turns it into reusable skills that help AI agents write idiomatic, Apple-native SwiftUI code.
+/swiftui-skills extracts internal Apple documentation shipped inside Xcode and turns it into reusable skills that help AI agents write idiomatic, Apple-native SwiftUI code.
 
 - Uses Apple-written guidance from inside Xcode
 - Reduces hallucinated or non-idiomatic SwiftUI

@@ -12,7 +12,7 @@ const ibmPlexSans = IBM_Plex_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "swiftui-skills",
+  title: "/swiftui-skills",
   description:
     "Apple-authored SwiftUI and Apple platform guidance, packaged as skills for AI coding agents.",
 };

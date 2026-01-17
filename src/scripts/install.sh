@@ -34,7 +34,7 @@ print_error() {
 
 show_help() {
     echo ""
-    echo -e "${BLUE}swiftui-skills${NC} installer"
+    echo -e "${BLUE}/swiftui-skills${NC} installer"
     echo ""
     echo "Usage: install.sh [options]"
     echo ""
@@ -136,7 +136,7 @@ prompt_for_path() {
 }
 
 echo ""
-echo -e "${BLUE}swiftui-skills${NC} installer"
+echo -e "${BLUE}/swiftui-skills${NC} installer"
 echo ""
 
 # Determine docs path
