@@ -30,7 +30,7 @@ export default function RootLayout({
         ibmPlexSans.variable
       )}
     >
-      <body className={`${ibmPlexSans.variable} font-sans antialiased`}>
+      <body className="font-sans antialiased">
         <Background />
         {children}
       </body>
