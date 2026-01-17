@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 import Background from "@/components/background";
+import { cn } from "@/lib/utils";
 
 const ibmPlexSans = IBM_Plex_Sans({
   weight: ["300", "400", "500", "600", "700"],
@@ -22,7 +23,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+   <html
+      lang="en"
+      className={cn(
+        "bg-white text-black dark:bg-[#111010] dark:text-white",
+        ibmPlexSans.variable
+      )}
+    >
       <body className={`${ibmPlexSans.variable} font-sans antialiased`}>
         <Background />
         {children}
