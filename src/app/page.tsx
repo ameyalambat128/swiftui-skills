@@ -101,7 +101,12 @@ export default function Home() {
             </div>
           </div>
           <p className="mt-3 text-sm text-gray-600">
-            Works with Claude Code, Cursor, and similar tools.
+            Works with{" "}
+            <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline">Claude Code</a>,{" "}
+            <a href="https://cursor.com" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline">Cursor</a>,{" "}
+            <a href="https://opencode.ai" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline">OpenCode</a>,{" "}
+            <a href="https://github.com/openai/codex" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline">Codex</a>, and{" "}
+            <a href="https://antigravity.dev" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline">Antigravity</a>.
           </p>
 
           <div className="mt-4 flex gap-4">
@@ -132,7 +137,14 @@ export default function Home() {
             <ul className="space-y-1 list-disc list-inside text-gray-400">
               <li>Uses Apple-written guidance from inside Xcode</li>
               <li>Reduces hallucinated or non-idiomatic SwiftUI</li>
-              <li>Works with Claude Code, Cursor, and similar tools</li>
+              <li>
+                Works with{" "}
+                <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline">Claude Code</a>,{" "}
+                <a href="https://cursor.com" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline">Cursor</a>,{" "}
+                <a href="https://opencode.ai" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline">OpenCode</a>,{" "}
+                <a href="https://github.com/openai/codex" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline">Codex</a>, and{" "}
+                <a href="https://antigravity.dev" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline">Antigravity</a>
+              </li>
               <li>Open source and local-first</li>
             </ul>
           </section>
