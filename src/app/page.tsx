@@ -109,14 +109,16 @@ export default function Home() {
             Works with{" "}
             <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline hover:text-white">Claude Code</a>,{" "}
             <a href="https://cursor.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline hover:text-white">Cursor</a>,{" "}
+            <a href="https://github.com/openai/codex" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline hover:text-white">Codex</a>,{" "}
             <a href="https://opencode.ai" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline hover:text-white">OpenCode</a>,{" "}
-            <a href="https://github.com/openai/codex" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline hover:text-white">Codex</a>, and{" "}
+            <a href="https://windsurf.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline hover:text-white">Windsurf</a>,{" "}
+            <a href="https://ai.google.dev/gemini-api/docs/cli" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline hover:text-white">Gemini CLI</a>, and{" "}
             <a href="https://antigravity.dev" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline hover:text-white">Antigravity</a>.
           </p>
 
           <div className="mt-4 flex gap-4">
             <a
-              href="https://github.com/ameyalambat/swiftui-skills"
+              href="https://github.com/ameyalambat128/swiftui-skills"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-gray-400 transition-colors hover:text-white hover:underline"
@@ -263,7 +265,7 @@ export default function Home() {
             </p>
             <div className="flex gap-4">
               <a
-                href="https://github.com/ameyalambat/swiftui-skills"
+                href="https://github.com/ameyalambat128/swiftui-skills"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-gray-400 transition-colors hover:text-white hover:underline"
@@ -271,7 +273,7 @@ export default function Home() {
                 GitHub repository
               </a>
               <a
-                href="https://github.com/ameyalambat/swiftui-skills/issues"
+                href="https://github.com/ameyalambat128/swiftui-skills/issues"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-gray-400 transition-colors hover:text-white hover:underline"
