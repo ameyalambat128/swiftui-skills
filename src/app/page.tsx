@@ -76,9 +76,9 @@ export default function Home() {
           </h1>
 
           <p className="mt-4 text-lg text-gray-100">
-            Apple-authored SwiftUI and platform guidance,
+            Agent skills for SwiftUI,
             <br className="hidden sm:block" />
-            packaged as skills for AI coding agents.
+            built from Apple&apos;s Xcode AI documentation.
           </p>
 
           <p className="mt-6 leading-relaxed text-gray-400">

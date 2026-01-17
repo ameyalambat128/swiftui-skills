@@ -12,9 +12,9 @@ const ibmPlexSans = IBM_Plex_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "/swiftui-skills",
+  title: "/swiftui-skills - Agent Skills for SwiftUI",
   description:
-    "Apple-authored SwiftUI and platform guidance, packaged as skills for AI coding agents. Local install. No telemetry.",
+    "Agent skills for SwiftUI, built from Apple's Xcode AI documentation. Local install. No telemetry.",
   keywords: [
     "SwiftUI",
     "AI",
@@ -31,9 +31,9 @@ export const metadata: Metadata = {
   creator: "Ameya Lambat",
   metadataBase: new URL("https://swiftui-skills.ameyalambat.com"),
   openGraph: {
-    title: "/swiftui-skills",
+    title: "/swiftui-skills - Agent Skills for SwiftUI",
     description:
-      "Apple-authored SwiftUI and platform guidance, packaged as skills for AI coding agents.",
+      "Agent skills for SwiftUI, built from Apple's Xcode AI documentation.",
     url: "https://swiftui-skills.ameyalambat.com",
     siteName: "/swiftui-skills",
     locale: "en_US",
@@ -41,10 +41,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "/swiftui-skills",
+    title: "/swiftui-skills - Agent Skills for SwiftUI",
     description:
-      "Apple-authored SwiftUI and platform guidance, packaged as skills for AI coding agents.",
-    creator: "@ameyalambat",
+      "Agent skills for SwiftUI, built from Apple's Xcode AI documentation.",
+    creator: "@lambatameya",
   },
   robots: {
     index: true,
