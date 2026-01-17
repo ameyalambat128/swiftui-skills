@@ -6,7 +6,7 @@ set -e
 
 SKILL_NAME="swiftui-skills"
 INSTALL_DIR="${HOME}/.${SKILL_NAME}"
-XCODE_DOCS_PATH="/Applications/Xcode.app/Contents/Developer/Documentation/SwiftUI/Additional"
+XCODE_DOCS_PATH="/Applications/Xcode.app/Contents/PlugIns/IDEIntelligenceChat.framework/Versions/A/Resources/AdditionalDocumentation"
 
 # Colors
 RED='\033[0;31m'
@@ -47,15 +47,36 @@ print_success "Xcode found"
 # Check for Xcode docs
 print_step "Checking for Xcode documentation..."
 if [ ! -d "$XCODE_DOCS_PATH" ]; then
-    print_warning "Additional documentation not found at expected path"
-    print_warning "Looking for alternative documentation paths..."
+    print_warning "Documentation not found at expected path"
+    print_step "Searching for AdditionalDocumentation in Xcode..."
 
-    # Try to find docs in other locations
-    XCODE_DOCS_PATH=$(find /Applications/Xcode.app -name "AdditionalDocumentation" -type d 2>/dev/null | head -1)
+    # Try known alternative paths first
+    KNOWN_PATHS=(
+        "/Applications/Xcode.app/Contents/PlugIns/IDEIntelligenceChat.framework/Resources/AdditionalDocumentation"
+        "/Applications/Xcode-beta.app/Contents/PlugIns/IDEIntelligenceChat.framework/Versions/A/Resources/AdditionalDocumentation"
+    )
 
-    if [ -z "$XCODE_DOCS_PATH" ]; then
+    for path in "${KNOWN_PATHS[@]}"; do
+        if [ -d "$path" ]; then
+            XCODE_DOCS_PATH="$path"
+            break
+        fi
+    done
+
+    # If still not found, search broadly
+    if [ ! -d "$XCODE_DOCS_PATH" ]; then
+        XCODE_DOCS_PATH=$(find /Applications/Xcode*.app -name "AdditionalDocumentation" -type d 2>/dev/null | head -1)
+    fi
+
+    if [ -z "$XCODE_DOCS_PATH" ] || [ ! -d "$XCODE_DOCS_PATH" ]; then
         print_error "Could not find Apple AdditionalDocumentation in Xcode"
-        echo "    This may require a newer version of Xcode"
+        echo ""
+        echo "    Searched locations:"
+        echo "    - IDEIntelligenceChat.framework/.../AdditionalDocumentation"
+        echo "    - Xcode.app and Xcode-beta.app"
+        echo ""
+        echo "    This feature requires Xcode 26 or later."
+        echo "    Make sure you have the latest Xcode installed."
         exit 1
     fi
 fi
