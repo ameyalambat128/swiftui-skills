@@ -76,15 +76,15 @@ export default function Home() {
           </h1>
 
           <p className="mt-4 text-lg text-gray-100">
-            Apple-authored SwiftUI and Apple platform guidance,
+            Apple-authored SwiftUI and platform guidance,
             <br className="hidden sm:block" />
             packaged as skills for AI coding agents.
           </p>
 
           <p className="mt-6 leading-relaxed text-gray-400">
-            /swiftui-skills extracts internal Apple documentation shipped inside Xcode
+            /swiftui-skills extracts Apple-authored documentation shipped inside Xcode
             and turns it into reusable skills that help AI agents write idiomatic,
-            Apple-native SwiftUI code.
+            Apple-native SwiftUI.
           </p>
 
           {/* Installation */}
@@ -103,6 +103,9 @@ export default function Home() {
             </div>
           </div>
           <p className="mt-3 text-sm text-gray-600">
+            Local install. No telemetry. No Apple documentation redistributed.
+          </p>
+          <p className="mt-2 text-sm text-gray-600">
             Works with{" "}
             <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline hover:text-white">Claude Code</a>,{" "}
             <a href="https://cursor.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline hover:text-white">Cursor</a>,{" "}
@@ -131,22 +134,17 @@ export default function Home() {
             <p className="mb-4 leading-relaxed text-gray-400">
               SwiftUI is opinionated. Most AI agents don&apos;t know those opinions.
             </p>
-            <p className="mb-6 leading-relaxed text-gray-400">
+            <p className="mb-4 leading-relaxed text-gray-400">
               /swiftui-skills is a collection of skills built from Apple-authored
-              documentation that ships inside Xcode. These skills condition AI agents
-              to follow the same patterns Apple expects in real SwiftUI apps.
+              documentation that ships inside Xcode.
+            </p>
+            <p className="mb-6 leading-relaxed text-gray-400">
+              These skills condition AI agents to follow the same patterns Apple
+              expects in real SwiftUI apps.
             </p>
             <ul className="space-y-1 list-disc list-inside text-gray-400">
               <li>Uses Apple-written guidance from inside Xcode</li>
-              <li>Reduces hallucinated or non-idiomatic SwiftUI</li>
-              <li>
-                Works with{" "}
-                <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">Claude Code</a>,{" "}
-                <a href="https://cursor.com" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">Cursor</a>,{" "}
-                <a href="https://opencode.ai" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">OpenCode</a>,{" "}
-                <a href="https://github.com/openai/codex" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">Codex</a>, and{" "}
-                <a href="https://antigravity.dev" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">Antigravity</a>
-              </li>
+              <li>Reduces hallucinations and non-idiomatic SwiftUI</li>
               <li>Open source and local-first</li>
             </ul>
           </section>
@@ -159,7 +157,7 @@ export default function Home() {
             <p className="mb-4 leading-relaxed text-gray-400">
               AI agents struggle with SwiftUI not because the models are weak,
               but because SwiftUI encodes architectural and design decisions
-              that are rarely written down in public docs.
+              that are rarely written down in public documentation.
             </p>
             <p className="mb-4 leading-relaxed text-gray-400">
               Apple already solved this internally.
@@ -174,6 +172,9 @@ export default function Home() {
           {/* What's included */}
           <section>
             <h2 className="mb-4 text-xl font-bold gradient-text">What&apos;s included</h2>
+            <p className="mb-4 leading-relaxed text-gray-400">
+              The current skill set covers:
+            </p>
             <div className="grid gap-2 sm:grid-cols-2">
               {[
                 "SwiftUI patterns and composition",
@@ -202,6 +203,9 @@ export default function Home() {
           {/* How it works */}
           <section>
             <h2 className="mb-4 text-xl font-bold gradient-text">How it works</h2>
+            <p className="mb-6 leading-relaxed text-gray-400">
+              /swiftui-skills works by giving AI agents better context, not new models.
+            </p>
             <div className="space-y-4">
               <div className="flex gap-4">
                 <span className="text-gray-600 font-mono">1.</span>
@@ -249,10 +253,13 @@ export default function Home() {
             <p className="mb-4 leading-relaxed text-gray-400">
               /swiftui-skills is open source.
             </p>
-            <p className="mb-6 leading-relaxed text-gray-400">
+            <p className="mb-4 leading-relaxed text-gray-400">
               The skill definitions, prompts, and installer are public.
               Apple documentation is extracted locally from Xcode
               and is never redistributed.
+            </p>
+            <p className="mb-6 leading-relaxed text-gray-400">
+              You can inspect the installer before running it.
             </p>
             <div className="flex gap-4">
               <a
@@ -273,12 +280,22 @@ export default function Home() {
               </a>
             </div>
           </section>
+
+          <Divider />
+
+          {/* Status */}
+          <section>
+            <h2 className="mb-4 text-xl font-bold gradient-text">Status</h2>
+            <p className="leading-relaxed text-gray-400">
+              Early and evolving. Expect changes as Apple updates Xcode.
+            </p>
+          </section>
         </main>
 
         {/* Footer */}
         <footer className="border-t border-neutral-800 mt-16 mb-8">
           <div className="flex justify-between py-4 text-xs md:text-sm text-gray-600">
-            <p>Not affiliated with Apple.</p>
+            <p>Not affiliated with Apple. Built independently.</p>
             <div className="flex items-center gap-1">
               <a
                 href="https://ameyalambat.com"
