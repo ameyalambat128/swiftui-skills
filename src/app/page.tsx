@@ -102,11 +102,11 @@ export default function Home() {
           </div>
           <p className="mt-3 text-sm text-gray-600">
             Works with{" "}
-            <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline">Claude Code</a>,{" "}
-            <a href="https://cursor.com" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline">Cursor</a>,{" "}
-            <a href="https://opencode.ai" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline">OpenCode</a>,{" "}
-            <a href="https://github.com/openai/codex" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline">Codex</a>, and{" "}
-            <a href="https://antigravity.dev" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline">Antigravity</a>.
+            <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline hover:text-white">Claude Code</a>,{" "}
+            <a href="https://cursor.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline hover:text-white">Cursor</a>,{" "}
+            <a href="https://opencode.ai" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline hover:text-white">OpenCode</a>,{" "}
+            <a href="https://github.com/openai/codex" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline hover:text-white">Codex</a>, and{" "}
+            <a href="https://antigravity.dev" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline hover:text-white">Antigravity</a>.
           </p>
 
           <div className="mt-4 flex gap-4">
@@ -139,11 +139,11 @@ export default function Home() {
               <li>Reduces hallucinated or non-idiomatic SwiftUI</li>
               <li>
                 Works with{" "}
-                <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline">Claude Code</a>,{" "}
-                <a href="https://cursor.com" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline">Cursor</a>,{" "}
-                <a href="https://opencode.ai" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline">OpenCode</a>,{" "}
-                <a href="https://github.com/openai/codex" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline">Codex</a>, and{" "}
-                <a href="https://antigravity.dev" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline">Antigravity</a>
+                <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">Claude Code</a>,{" "}
+                <a href="https://cursor.com" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">Cursor</a>,{" "}
+                <a href="https://opencode.ai" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">OpenCode</a>,{" "}
+                <a href="https://github.com/openai/codex" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">Codex</a>, and{" "}
+                <a href="https://antigravity.dev" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">Antigravity</a>
               </li>
               <li>Open source and local-first</li>
             </ul>
