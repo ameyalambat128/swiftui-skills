@@ -6,7 +6,8 @@ set -e
 
 SKILL_NAME="swiftui-skills"
 INSTALL_DIR="${HOME}/.${SKILL_NAME}"
-XCODE_DOCS_PATH="/Applications/Xcode.app/Contents/PlugIns/IDEIntelligenceChat.framework/Versions/A/Resources/AdditionalDocumentation"
+CUSTOM_XCODE_PATH=""
+CUSTOM_DOCS_PATH=""
 
 # Colors
 RED='\033[0;31m'
@@ -31,56 +32,187 @@ print_error() {
     echo -e "${RED}✗${NC} $1"
 }
 
+show_help() {
+    echo ""
+    echo -e "${BLUE}swiftui-skills${NC} installer"
+    echo ""
+    echo "Usage: install.sh [options]"
+    echo ""
+    echo "Options:"
+    echo "  --xcode-path PATH    Path to Xcode.app (if not in /Applications)"
+    echo "  --docs-path PATH     Direct path to AdditionalDocumentation folder"
+    echo "  --help               Show this help message"
+    echo ""
+    echo "Examples:"
+    echo "  ./install.sh"
+    echo "  ./install.sh --xcode-path /Applications/Xcode-beta.app"
+    echo "  ./install.sh --docs-path ~/Downloads/AdditionalDocumentation"
+    echo ""
+    exit 0
+}
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --xcode-path)
+            CUSTOM_XCODE_PATH="$2"
+            shift 2
+            ;;
+        --docs-path)
+            CUSTOM_DOCS_PATH="$2"
+            shift 2
+            ;;
+        --help|-h)
+            show_help
+            ;;
+        *)
+            print_error "Unknown option: $1"
+            echo "    Use --help for usage information"
+            exit 1
+            ;;
+    esac
+done
+
+# Function to find docs in an Xcode installation
+find_docs_in_xcode() {
+    local xcode_path="$1"
+    local docs_path="${xcode_path}/Contents/PlugIns/IDEIntelligenceChat.framework/Versions/A/Resources/AdditionalDocumentation"
+
+    if [ -d "$docs_path" ]; then
+        echo "$docs_path"
+        return 0
+    fi
+
+    # Try alternative path
+    docs_path="${xcode_path}/Contents/PlugIns/IDEIntelligenceChat.framework/Resources/AdditionalDocumentation"
+    if [ -d "$docs_path" ]; then
+        echo "$docs_path"
+        return 0
+    fi
+
+    return 1
+}
+
+# Function to prompt user for path
+prompt_for_path() {
+    echo ""
+    print_warning "Could not automatically find the documentation."
+    echo ""
+    echo "    Please enter one of the following:"
+    echo "    - Path to Xcode.app (e.g., /Applications/Xcode.app)"
+    echo "    - Path to AdditionalDocumentation folder"
+    echo ""
+    read -p "    Path: " user_path
+
+    if [ -z "$user_path" ]; then
+        print_error "No path provided"
+        exit 1
+    fi
+
+    # Expand ~ if present
+    user_path="${user_path/#\~/$HOME}"
+
+    # Check if it's a docs path (contains AdditionalDocumentation or has .md files)
+    if [[ "$user_path" == *"AdditionalDocumentation"* ]] || [ -f "$user_path"/*.md ] 2>/dev/null; then
+        if [ -d "$user_path" ]; then
+            XCODE_DOCS_PATH="$user_path"
+            return 0
+        fi
+    fi
+
+    # Check if it's an Xcode path
+    if [[ "$user_path" == *".app" ]] && [ -d "$user_path" ]; then
+        local found_path
+        found_path=$(find_docs_in_xcode "$user_path")
+        if [ -n "$found_path" ]; then
+            XCODE_DOCS_PATH="$found_path"
+            return 0
+        fi
+    fi
+
+    print_error "Could not find AdditionalDocumentation at the provided path"
+    echo "    Make sure you have Xcode 26 or later installed"
+    exit 1
+}
+
 echo ""
 echo -e "${BLUE}swiftui-skills${NC} installer"
 echo ""
 
-# Check for Xcode
-print_step "Checking for Xcode..."
-if [ ! -d "/Applications/Xcode.app" ]; then
-    print_error "Xcode not found at /Applications/Xcode.app"
-    echo "    Please install Xcode from the App Store or developer.apple.com"
-    exit 1
-fi
-print_success "Xcode found"
+# Determine docs path
+XCODE_DOCS_PATH=""
 
-# Check for Xcode docs
-print_step "Checking for Xcode documentation..."
-if [ ! -d "$XCODE_DOCS_PATH" ]; then
-    print_warning "Documentation not found at expected path"
-    print_step "Searching for AdditionalDocumentation in Xcode..."
+if [ -n "$CUSTOM_DOCS_PATH" ]; then
+    # User provided direct docs path
+    CUSTOM_DOCS_PATH="${CUSTOM_DOCS_PATH/#\~/$HOME}"
+    if [ -d "$CUSTOM_DOCS_PATH" ]; then
+        XCODE_DOCS_PATH="$CUSTOM_DOCS_PATH"
+        print_success "Using provided docs path: $XCODE_DOCS_PATH"
+    else
+        print_error "Docs path not found: $CUSTOM_DOCS_PATH"
+        exit 1
+    fi
+elif [ -n "$CUSTOM_XCODE_PATH" ]; then
+    # User provided custom Xcode path
+    CUSTOM_XCODE_PATH="${CUSTOM_XCODE_PATH/#\~/$HOME}"
+    print_step "Checking custom Xcode path..."
+    if [ ! -d "$CUSTOM_XCODE_PATH" ]; then
+        print_error "Xcode not found at: $CUSTOM_XCODE_PATH"
+        exit 1
+    fi
+    XCODE_DOCS_PATH=$(find_docs_in_xcode "$CUSTOM_XCODE_PATH") || true
+    if [ -z "$XCODE_DOCS_PATH" ]; then
+        print_error "AdditionalDocumentation not found in: $CUSTOM_XCODE_PATH"
+        echo "    Make sure you have Xcode 26 or later"
+        exit 1
+    fi
+    print_success "Documentation found at: $XCODE_DOCS_PATH"
+else
+    # Auto-detect
+    print_step "Checking for Xcode..."
 
-    # Try known alternative paths first
-    KNOWN_PATHS=(
-        "/Applications/Xcode.app/Contents/PlugIns/IDEIntelligenceChat.framework/Resources/AdditionalDocumentation"
-        "/Applications/Xcode-beta.app/Contents/PlugIns/IDEIntelligenceChat.framework/Versions/A/Resources/AdditionalDocumentation"
+    # Try standard locations
+    XCODE_LOCATIONS=(
+        "/Applications/Xcode.app"
+        "/Applications/Xcode-beta.app"
     )
 
-    for path in "${KNOWN_PATHS[@]}"; do
-        if [ -d "$path" ]; then
-            XCODE_DOCS_PATH="$path"
-            break
+    for xcode in "${XCODE_LOCATIONS[@]}"; do
+        if [ -d "$xcode" ]; then
+            print_success "Found $(basename "$xcode")"
+            XCODE_DOCS_PATH=$(find_docs_in_xcode "$xcode") || true
+            if [ -n "$XCODE_DOCS_PATH" ]; then
+                break
+            fi
         fi
     done
 
     # If still not found, search broadly
-    if [ ! -d "$XCODE_DOCS_PATH" ]; then
-        XCODE_DOCS_PATH=$(find /Applications/Xcode*.app -name "AdditionalDocumentation" -type d 2>/dev/null | head -1)
+    if [ -z "$XCODE_DOCS_PATH" ]; then
+        print_step "Searching for AdditionalDocumentation..."
+        XCODE_DOCS_PATH=$(find /Applications/Xcode*.app -name "AdditionalDocumentation" -type d 2>/dev/null | head -1) || true
     fi
 
+    # If still not found, prompt user
     if [ -z "$XCODE_DOCS_PATH" ] || [ ! -d "$XCODE_DOCS_PATH" ]; then
-        print_error "Could not find Apple AdditionalDocumentation in Xcode"
-        echo ""
-        echo "    Searched locations:"
-        echo "    - IDEIntelligenceChat.framework/.../AdditionalDocumentation"
-        echo "    - Xcode.app and Xcode-beta.app"
-        echo ""
-        echo "    This feature requires Xcode 26 or later."
-        echo "    Make sure you have the latest Xcode installed."
-        exit 1
+        # Check if Xcode exists at all
+        if [ ! -d "/Applications/Xcode.app" ] && [ ! -d "/Applications/Xcode-beta.app" ]; then
+            print_error "Xcode not found"
+            echo ""
+            echo "    Please install Xcode from:"
+            echo "    - App Store: https://apps.apple.com/app/xcode/id497799835"
+            echo "    - Developer: https://developer.apple.com/xcode/"
+            echo ""
+            echo "    Or if Xcode is installed elsewhere, run:"
+            echo "    ./install.sh --xcode-path /path/to/Xcode.app"
+            echo ""
+        fi
+
+        prompt_for_path
+    else
+        print_success "Documentation found at: $XCODE_DOCS_PATH"
     fi
 fi
-print_success "Documentation found at: $XCODE_DOCS_PATH"
 
 # Create install directory
 print_step "Creating install directory..."
@@ -128,7 +260,7 @@ fi
 # Create metadata
 print_step "Creating metadata..."
 mkdir -p "$INSTALL_DIR/metadata"
-XCODE_VERSION=$(/usr/bin/xcodebuild -version 2>/dev/null | head -1 | awk '{print $2}')
+XCODE_VERSION=$(/usr/bin/xcodebuild -version 2>/dev/null | head -1 | awk '{print $2}') || XCODE_VERSION="unknown"
 cat > "$INSTALL_DIR/metadata/sources.json" << EOF
 {
   "xcode_version": "$XCODE_VERSION",
