@@ -1,0 +1,11 @@
+#!/bin/bash
+# swiftui-skills installer wrapper
+# This script is fetched via: curl -fsSL https://swiftui-skills.ameyalambat.com/install | bash
+# It downloads and runs the full installer from GitHub.
+
+set -e
+
+REPO_RAW="https://raw.githubusercontent.com/ameyalambat/swiftui-skills/main"
+
+# Download and execute the full installer
+curl -fsSL "$REPO_RAW/src/scripts/install.sh" | bash
