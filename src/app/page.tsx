@@ -261,24 +261,21 @@ export default function Home() {
           </section>
         </main>
 
-        {/* Footer - matching ameyalambat.com style */}
+        {/* Footer */}
         <footer className="border-t border-neutral-800 mt-16 mb-8">
           <div className="flex justify-between py-4 text-xs md:text-sm text-gray-600">
-            <p>
-              Built by Ameya Lambat.
-              <span className="ml-1 text-gray-500">Not affiliated with Apple.</span>
-            </p>
+            <p>Not affiliated with Apple.</p>
             <div className="flex items-center gap-1">
               <a
-                href="mailto:i@ameyalambat.com"
+                href="https://ameyalambat.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-colors hover:text-white hover:underline"
               >
-                i@ameyalambat.com
+                ameyalambat.com
               </a>
               <span>|</span>
-              <span>2026</span>
+              <span>{new Date().getFullYear()}</span>
             </div>
           </div>
         </footer>
