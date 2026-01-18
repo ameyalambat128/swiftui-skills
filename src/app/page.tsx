@@ -63,7 +63,8 @@ function Divider() {
 }
 
 export default function Home() {
-  const installCommand = "curl -fsSL https://swiftui-skills.ameyalambat.com/install | bash";
+  const npxCommand = "npx skills add ameyalambat128/swiftui-skills";
+  const curlCommand = "curl -fsSL https://swiftui-skills.ameyalambat.com/install | bash";
 
   return (
     <div className="relative min-h-screen overflow-x-hidden">
@@ -90,12 +91,21 @@ export default function Home() {
           {/* Installation */}
           <h2 className="mt-16 mb-4 text-xl font-bold gradient-text">Installation</h2>
           <div className="px-5 py-4 font-mono text-sm rounded-lg bg-neutral-900 ring-1 ring-neutral-800">
+            <p className="text-xs text-gray-500 mb-3 font-sans">Recommended</p>
             <div className="flex gap-4 justify-between items-center">
               <div className="text-gray-400 overflow-x-auto">
                 <span className="select-none text-gray-600">$ </span>
-                {installCommand}
+                {npxCommand}
               </div>
-              <CopyButton text={installCommand} />
+              <CopyButton text={npxCommand} />
+            </div>
+            <p className="text-xs text-gray-500 mt-4 mb-3 font-sans">Or use curl</p>
+            <div className="flex gap-4 justify-between items-center">
+              <div className="text-gray-400 overflow-x-auto">
+                <span className="select-none text-gray-600">$ </span>
+                {curlCommand}
+              </div>
+              <CopyButton text={curlCommand} />
             </div>
             <div className="pt-4 mt-4 border-t border-neutral-800 text-gray-500">
               <span className="select-none text-gray-600">&gt; </span>
