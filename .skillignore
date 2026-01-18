@@ -1,0 +1,39 @@
+# Development files
+node_modules/
+.next/
+.vercel/
+.turbo/
+*.log
+
+# Build outputs
+dist/
+build/
+out/
+
+# Development and configuration
+.env*
+.git/
+.github/
+.vscode/
+.idea/
+
+# Next.js specific
+public/
+src/app/
+src/components/
+src/lib/
+next.config.ts
+postcss.config.mjs
+tsconfig.json
+
+# Package management
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Documentation should be generated locally
+src/skill/docs/
