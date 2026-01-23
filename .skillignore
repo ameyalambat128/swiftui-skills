@@ -34,6 +34,3 @@ pnpm-lock.yaml
 # OS files
 .DS_Store
 Thumbs.db
-
-# Documentation should be generated locally
-src/skill/docs/

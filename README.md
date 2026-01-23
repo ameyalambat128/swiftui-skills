@@ -15,13 +15,14 @@ SwiftUI is opinionated. Most AI agents don't know those opinions.
 
 ## Installation
 
-### Using npx skills (Recommended)
+### Using npx skills
 
 ```bash
 npx skills add ameyalambat128/swiftui-skills
+~/.agents/skills/swiftui-skills/setup.sh
 ```
 
-### Using curl
+### Using curl (one-step)
 
 ```bash
 curl -fsSL https://swiftui-skills.ameyalambat.com/install | bash

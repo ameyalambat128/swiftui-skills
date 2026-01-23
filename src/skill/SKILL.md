@@ -21,6 +21,14 @@ All factual claims and APIs must be grounded in files under `/docs`.
 - If you are reviewing code: list issues and improvements, referencing doc(s) used.
 - If uncertain: ask at most 1 question, only if the answer changes architecture.
 
+## Setup check
+If the `docs/` folder is empty or contains no `.md` files, the Xcode documentation has not been extracted yet.
+Tell the user to run the setup script to complete installation:
+```
+~/.agents/skills/swiftui-skills/setup.sh
+```
+Do not proceed with SwiftUI guidance until docs are available.
+
 ## Non-negotiables
 - Do not invent types or APIs. If it is not in `/docs`, say so and offer a safe alternative.
 - Prefer minimal, idiomatic SwiftUI and platform conventions.
