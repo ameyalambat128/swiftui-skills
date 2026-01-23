@@ -22,6 +22,8 @@ npx skills add ameyalambat128/swiftui-skills
 ~/.agents/skills/swiftui-skills/setup.sh
 ```
 
+The first command installs the skill. The second extracts Apple documentation from your local Xcode installation.
+
 ### Using curl (one-step)
 
 ```bash
