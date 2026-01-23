@@ -4,7 +4,6 @@
 
 set -e
 
-# Get the directory where this script is located
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DOCS_DIR="$SCRIPT_DIR/docs"
 METADATA_DIR="$SCRIPT_DIR/metadata"
@@ -13,32 +12,60 @@ CUSTOM_XCODE_PATH=""
 CUSTOM_DOCS_PATH=""
 
 # Colors
-RED='\033[0;31m'
+CYAN='\033[0;36m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
-BLUE='\033[0;34m'
+RED='\033[0;31m'
+DIM='\033[2m'
 NC='\033[0m'
 
+# TUI helpers
+print_banner() {
+    echo ""
+    echo -e "${CYAN}███████╗██╗    ██╗██╗███████╗████████╗██╗   ██╗██╗${NC}"
+    echo -e "${CYAN}██╔════╝██║    ██║██║██╔════╝╚══██╔══╝██║   ██║██║${NC}"
+    echo -e "${CYAN}███████╗██║ █╗ ██║██║█████╗     ██║   ██║   ██║██║${NC}"
+    echo -e "${CYAN}╚════██║██║███╗██║██║██╔══╝     ██║   ██║   ██║██║${NC}"
+    echo -e "${CYAN}███████║╚███╔███╔╝██║██║        ██║   ╚██████╔╝██║${NC}"
+    echo -e "${CYAN}╚══════╝ ╚══╝╚══╝ ╚═╝╚═╝        ╚═╝    ╚═════╝ ╚═╝${NC}"
+    echo -e "${DIM}                                           skills${NC}"
+    echo ""
+}
+
+print_header() {
+    echo -e "┌   ${CYAN}$1${NC}"
+}
+
+print_line() {
+    echo "│"
+}
+
 print_step() {
-    echo -e "${BLUE}==>${NC} $1"
+    echo -e "◇  $1"
+}
+
+print_substep() {
+    echo -e "│  $1"
 }
 
 print_success() {
-    echo -e "${GREEN}✓${NC} $1"
+    echo -e "◇  ${GREEN}$1${NC}"
 }
 
 print_warning() {
-    echo -e "${YELLOW}!${NC} $1"
+    echo -e "◇  ${YELLOW}$1${NC}"
 }
 
 print_error() {
-    echo -e "${RED}✗${NC} $1"
+    echo -e "◇  ${RED}$1${NC}"
+}
+
+print_footer() {
+    echo -e "└  $1"
 }
 
 show_help() {
-    echo ""
-    echo -e "${BLUE}/swiftui-skills${NC} setup"
-    echo ""
+    print_banner
     echo "Extracts Apple documentation from Xcode to complete the skill installation."
     echo ""
     echo "Usage: setup.sh [options]"
@@ -92,14 +119,14 @@ find_docs_in_xcode() {
 }
 
 prompt_for_path() {
-    echo ""
+    print_line
     print_warning "Could not automatically find the documentation."
-    echo ""
-    echo "    Please enter one of the following:"
-    echo "    - Path to Xcode.app (e.g., /Applications/Xcode.app)"
-    echo "    - Path to AdditionalDocumentation folder"
-    echo ""
-    read -p "    Path: " user_path
+    print_line
+    print_substep "Please enter one of the following:"
+    print_substep "- Path to Xcode.app (e.g., /Applications/Xcode.app)"
+    print_substep "- Path to AdditionalDocumentation folder"
+    print_line
+    read -p "│  Path: " user_path
 
     if [ -z "$user_path" ]; then
         print_error "No path provided"
@@ -125,13 +152,14 @@ prompt_for_path() {
     fi
 
     print_error "Could not find AdditionalDocumentation at the provided path"
-    echo "    Make sure you have Xcode 26 or later installed"
+    print_substep "Make sure you have Xcode 26 or later installed"
     exit 1
 }
 
-echo ""
-echo -e "${BLUE}/swiftui-skills${NC} setup"
-echo ""
+# Start
+print_banner
+print_header "swiftui-skills setup"
+print_line
 
 # Determine docs path
 XCODE_DOCS_PATH=""
@@ -140,7 +168,7 @@ if [ -n "$CUSTOM_DOCS_PATH" ]; then
     CUSTOM_DOCS_PATH="${CUSTOM_DOCS_PATH/#\~/$HOME}"
     if [ -d "$CUSTOM_DOCS_PATH" ]; then
         XCODE_DOCS_PATH="$CUSTOM_DOCS_PATH"
-        print_success "Using provided docs path: $XCODE_DOCS_PATH"
+        print_success "Using provided docs path"
     else
         print_error "Docs path not found: $CUSTOM_DOCS_PATH"
         exit 1
@@ -155,12 +183,13 @@ elif [ -n "$CUSTOM_XCODE_PATH" ]; then
     XCODE_DOCS_PATH=$(find_docs_in_xcode "$CUSTOM_XCODE_PATH") || true
     if [ -z "$XCODE_DOCS_PATH" ]; then
         print_error "AdditionalDocumentation not found in: $CUSTOM_XCODE_PATH"
-        echo "    Make sure you have Xcode 26 or later"
+        print_substep "Make sure you have Xcode 26 or later"
         exit 1
     fi
-    print_success "Documentation found at: $XCODE_DOCS_PATH"
+    print_success "Documentation found"
 else
     print_step "Checking for Xcode..."
+    print_line
 
     XCODE_LOCATIONS=(
         "/Applications/Xcode.app"
@@ -169,7 +198,6 @@ else
 
     for xcode in "${XCODE_LOCATIONS[@]}"; do
         if [ -d "$xcode" ]; then
-            print_success "Found $(basename "$xcode")"
             XCODE_DOCS_PATH=$(find_docs_in_xcode "$xcode") || true
             if [ -n "$XCODE_DOCS_PATH" ]; then
                 break
@@ -185,25 +213,28 @@ else
     if [ -z "$XCODE_DOCS_PATH" ] || [ ! -d "$XCODE_DOCS_PATH" ]; then
         if [ ! -d "/Applications/Xcode.app" ] && [ ! -d "/Applications/Xcode-beta.app" ]; then
             print_error "Xcode not found"
-            echo ""
-            echo "    Please install Xcode from:"
-            echo "    - App Store: https://apps.apple.com/app/xcode/id497799835"
-            echo "    - Developer: https://developer.apple.com/xcode/"
-            echo ""
-            echo "    Or run with a custom path:"
-            echo "    $0 --xcode-path /path/to/Xcode.app"
-            echo ""
+            print_line
+            print_substep "Please install Xcode from:"
+            print_substep "- App Store: https://apps.apple.com/app/xcode/id497799835"
+            print_substep "- Developer: https://developer.apple.com/xcode/"
+            print_line
+            print_substep "Or run with a custom path:"
+            print_substep "$0 --xcode-path /path/to/Xcode.app"
+            print_line
             exit 1
         fi
 
         prompt_for_path
     else
-        print_success "Documentation found at: $XCODE_DOCS_PATH"
+        XCODE_VERSION=$(/usr/bin/xcodebuild -version 2>/dev/null | head -1 | awk '{print $2}') || XCODE_VERSION="unknown"
+        print_success "Found Xcode $XCODE_VERSION"
     fi
 fi
 
+print_line
+
 # Extract documentation
-print_step "Extracting Apple documentation..."
+print_step "Extracting documentation..."
 mkdir -p "$DOCS_DIR"
 
 doc_count=0
@@ -214,11 +245,8 @@ for doc in "$XCODE_DOCS_PATH"/*.md; do
     fi
 done
 
-if [ $doc_count -eq 0 ]; then
-    print_warning "No markdown documentation found"
-else
-    print_success "Extracted $doc_count documentation files"
-fi
+print_success "Extracted $doc_count files from Xcode"
+print_line
 
 # Create metadata
 mkdir -p "$METADATA_DIR"
@@ -232,11 +260,13 @@ cat > "$METADATA_DIR/sources.json" << EOF
 }
 EOF
 
-echo ""
-print_success "Setup complete!"
-echo ""
-echo "    Documentation: $doc_count files extracted from Xcode"
-echo "    Location: $DOCS_DIR"
-echo ""
-echo "    The skill is now ready to use."
+# Summary box
+echo -e "◇  Setup Complete ──────────────────────────────────────────────────╮"
+echo "│                                                                   │"
+printf "│  ${GREEN}✓${NC} %-60s │\n" "Extracted $doc_count documentation files"
+printf "│  ${GREEN}✓${NC} %-60s │\n" "Location: $DOCS_DIR"
+echo "│                                                                   │"
+echo "├───────────────────────────────────────────────────────────────────╯"
+print_line
+print_footer "Done! The skill is ready to use."
 echo ""
