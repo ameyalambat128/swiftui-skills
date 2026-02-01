@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 import Background from "@/components/background";
+import { Providers } from "@/components/providers";
 import { cn } from "@/lib/utils";
 
 const ibmPlexSans = IBM_Plex_Sans({
@@ -70,13 +71,13 @@ export default function RootLayout({
    <html
       lang="en"
       className={cn(
-        "bg-white text-black dark:bg-[#111010] dark:text-white",
+        "dark bg-[#111010] text-white",
         ibmPlexSans.variable
       )}
     >
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased" suppressHydrationWarning>
         <Background />
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
