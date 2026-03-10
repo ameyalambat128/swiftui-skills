@@ -21,14 +21,28 @@ SwiftUI is opinionated. Most AI agents don't know those opinions.
 curl -fsSL https://swiftui-skills.ameyalambat.com/install | bash
 ```
 
-### Using npx skills
+### Advanced: Using npx skills
 
 ```bash
 npx skills add ameyalambat128/swiftui-skills
+```
+
+Choose the install scope in the `skills` TUI, and keep `Symlink (Recommended)` selected.
+
+#### Global install
+
+```bash
 ~/.agents/skills/swiftui-skills/setup.sh
 ```
 
-The first command installs the skill. The second extracts Apple documentation from your local Xcode installation.
+#### Project-local install
+
+```bash
+./.agents/skills/swiftui-skills/setup.sh
+```
+
+The first command installs the skill. The setup command extracts Apple documentation from your local Xcode installation.
+Agent-specific placement like Claude Code is handled by the `skills` CLI, so no extra Claude-specific step is needed in the interactive flow.
 
 ### Requirements
 
@@ -74,7 +88,7 @@ Documentation extracted from Xcode covers:
 
 ### Claude Code
 
-The installer automatically links the skill to `~/.claude/skills/`. The skill is available immediately.
+The custom installer automatically links the skill to `~/.claude/skills/` when Claude Code is detected. The skill is available immediately.
 
 ### Cursor
 
