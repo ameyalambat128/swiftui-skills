@@ -11,7 +11,8 @@ function Divider() {
 
 export default function Home() {
   const npxCommand = "npx skills add ameyalambat128/swiftui-skills";
-  const setupCommand = "~/.agents/skills/swiftui-skills/setup.sh";
+  const globalSetupCommand = "~/.agents/skills/swiftui-skills/setup.sh";
+  const localSetupCommand = "./.agents/skills/swiftui-skills/setup.sh";
   const curlCommand =
     "curl -fsSL https://swiftui-skills.ameyalambat.com/install | bash";
 
@@ -24,10 +25,7 @@ export default function Home() {
             <h1 className="text-3xl font-bold tracking-tight gradient-text">
               /swiftui-skills
             </h1>
-            <GitHubStars
-              username="ameyalambat128"
-              repo="swiftui-skills"
-            />
+            <GitHubStars username="ameyalambat128" repo="swiftui-skills" />
           </div>
 
           <p className="mt-4 text-lg text-gray-100">
@@ -65,12 +63,35 @@ export default function Home() {
               </div>
               <CopyButton text={npxCommand} />
             </div>
-            <div className="flex gap-4 justify-between items-center mt-2">
-              <div className="text-gray-400 overflow-x-auto">
-                <span className="select-none text-gray-600">$ </span>
-                {setupCommand}
+            <p className="text-xs text-gray-500 mt-2 font-sans">
+              Choose Global or Project in the skills TUI, and keep Symlink
+              (Recommended) selected.
+            </p>
+            <div className="mt-4 space-y-3">
+              <div>
+                <p className="text-xs text-gray-500 mb-2 font-sans">
+                  Global install
+                </p>
+                <div className="flex gap-4 justify-between items-center">
+                  <div className="text-gray-400 overflow-x-auto">
+                    <span className="select-none text-gray-600">$ </span>
+                    {globalSetupCommand}
+                  </div>
+                  <CopyButton text={globalSetupCommand} />
+                </div>
               </div>
-              <CopyButton text={setupCommand} />
+              <div>
+                <p className="text-xs text-gray-500 mb-2 font-sans">
+                  Project-local install
+                </p>
+                <div className="flex gap-4 justify-between items-center">
+                  <div className="text-gray-400 overflow-x-auto">
+                    <span className="select-none text-gray-600">$ </span>
+                    {localSetupCommand}
+                  </div>
+                  <CopyButton text={localSetupCommand} />
+                </div>
+              </div>
             </div>
             <div className="pt-4 mt-4 border-t border-neutral-800 text-gray-500">
               <span className="select-none text-gray-600">&gt; </span>
@@ -82,13 +103,69 @@ export default function Home() {
           </p>
           <p className="mt-2 text-sm text-gray-600">
             Works with{" "}
-            <Link href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline hover:text-white">Claude Code</Link>,{" "}
-            <Link href="https://cursor.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline hover:text-white">Cursor</Link>,{" "}
-            <Link href="https://github.com/openai/codex" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline hover:text-white">Codex</Link>,{" "}
-            <Link href="https://opencode.ai" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline hover:text-white">OpenCode</Link>,{" "}
-            <Link href="https://windsurf.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline hover:text-white">Windsurf</Link>,{" "}
-            <Link href="https://ai.google.dev/gemini-api/docs/cli" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline hover:text-white">Gemini CLI</Link>, and{" "}
-            <Link href="https://antigravity.dev" target="_blank" rel="noopener noreferrer" className="text-gray-400 underline hover:text-white">Antigravity</Link>.
+            <Link
+              href="https://docs.anthropic.com/en/docs/claude-code"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 underline hover:text-white"
+            >
+              Claude Code
+            </Link>
+            ,{" "}
+            <Link
+              href="https://cursor.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 underline hover:text-white"
+            >
+              Cursor
+            </Link>
+            ,{" "}
+            <Link
+              href="https://github.com/openai/codex"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 underline hover:text-white"
+            >
+              Codex
+            </Link>
+            ,{" "}
+            <Link
+              href="https://opencode.ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 underline hover:text-white"
+            >
+              OpenCode
+            </Link>
+            ,{" "}
+            <Link
+              href="https://windsurf.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 underline hover:text-white"
+            >
+              Windsurf
+            </Link>
+            ,{" "}
+            <Link
+              href="https://ai.google.dev/gemini-api/docs/cli"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 underline hover:text-white"
+            >
+              Gemini CLI
+            </Link>
+            , and{" "}
+            <Link
+              href="https://antigravity.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 underline hover:text-white"
+            >
+              Antigravity
+            </Link>
+            .
           </p>
 
           <div className="mt-4 flex gap-4">
@@ -136,8 +213,8 @@ export default function Home() {
             </h2>
             <p className="mb-4 leading-relaxed text-gray-400">
               AI agents struggle with SwiftUI not because the models are weak,
-              but because SwiftUI encodes architectural and design decisions that
-              are rarely written down in public documentation.
+              but because SwiftUI encodes architectural and design decisions
+              that are rarely written down in public documentation.
             </p>
             <p className="mb-4 leading-relaxed text-gray-400">
               Apple already solved this internally.
