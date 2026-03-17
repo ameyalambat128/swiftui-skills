@@ -31,6 +31,9 @@ export const metadata: Metadata = {
   authors: [{ name: "Ameya Lambat", url: "https://ameyalambat.com" }],
   creator: "Ameya Lambat",
   metadataBase: new URL("https://swiftui-skills.ameyalambat.com"),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "/swiftui-skills - Agent Skills for SwiftUI",
     description:
@@ -68,12 +71,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-   <html
+    <html
       lang="en"
-      className={cn(
-        "dark bg-[#111010] text-white",
-        ibmPlexSans.variable
-      )}
+      className={cn("dark bg-[#111010] text-white", ibmPlexSans.variable)}
     >
       <body className="font-sans antialiased" suppressHydrationWarning>
         <Background />

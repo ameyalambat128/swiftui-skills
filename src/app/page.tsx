@@ -4,6 +4,39 @@ import Link from "next/link";
 import { GitHubStars } from "@/components/github-stars";
 import { CopyButton } from "@/components/copy-button";
 import { GitHubIcon, XIcon } from "@/components/icons";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
+const faqItems = [
+  {
+    value: "ai-coding-agents",
+    question: "What are SwiftUI skills for AI coding agents?",
+    answer:
+      "/swiftui-skills packages Apple-authored guidance from Xcode into reusable skills that help AI coding agents generate more idiomatic SwiftUI. Instead of relying on generic guesses, the agent gets better context for composition, platform APIs, and the patterns Apple expects in real apps.",
+  },
+  {
+    value: "claude-code",
+    question: "How does the SwiftUI skill for Claude Code work?",
+    answer:
+      "Claude Code can use /swiftui-skills as local context during generation and refactoring. The setup flow extracts the docs from your local Xcode install, installs the skill locally, and gives Claude Code a stronger source of truth when it needs to write SwiftUI-heavy code.",
+  },
+  {
+    value: "cursor",
+    question: "Can I use this SwiftUI skill for Cursor?",
+    answer:
+      "Yes. The same SwiftUI skill for Cursor uses the locally extracted documentation and skill prompts to improve SwiftUI output inside your editor. The goal is the same across tools: better SwiftUI structure, fewer hallucinated APIs, and behavior that stays closer to Apple-native patterns.",
+  },
+  {
+    value: "xcode-docs",
+    question: "Why is this a SwiftUI coding skill from Xcode docs?",
+    answer:
+      "The project is built around documentation Apple ships inside Xcode, not scraped summaries or community paraphrases. That is what makes /swiftui-skills a SwiftUI coding skill from Xcode docs: the content is extracted locally from your machine and then used to guide the agent.",
+  },
+];
 
 function Divider() {
   return <hr className="h-1 w-full rounded bg-neutral-800 border-0" />;
@@ -345,6 +378,49 @@ export default function Home() {
                 className="text-sm text-gray-400 transition-colors hover:text-white hover:underline"
               >
                 Issues and contributions welcome
+              </Link>
+            </div>
+          </section>
+
+          <Divider />
+
+          <section>
+            <h2 className="mb-4 text-xl font-bold gradient-text">
+              SwiftUI skills FAQ
+            </h2>
+            <p className="mb-6 max-w-2xl leading-relaxed text-gray-400">
+              A short reference for people looking for SwiftUI skills for AI
+              coding agents, including setup for Claude Code and Cursor.
+            </p>
+            <div className="rounded-2xl border border-neutral-800 bg-neutral-950/60 px-5 py-3 ring-1 ring-neutral-900">
+              <Accordion type="single" collapsible className="w-full">
+                {faqItems.map(({ value, question, answer }) => (
+                  <AccordionItem key={value} value={value}>
+                    <AccordionTrigger className="text-base text-gray-200 hover:no-underline">
+                      {question}
+                    </AccordionTrigger>
+                    <AccordionContent className="pr-8 leading-relaxed text-gray-400">
+                      {answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+            <div className="mt-6 rounded-2xl border border-neutral-800 bg-neutral-950/60 p-5 ring-1 ring-neutral-900">
+              <p className="text-xs uppercase tracking-[0.22em] text-gray-500">
+                More context
+              </p>
+              <p className="mt-3 max-w-2xl leading-relaxed text-gray-400">
+                If you want the backstory, install flow, and why these skills
+                exist, there&apos;s a longer write-up on the blog.
+              </p>
+              <Link
+                href="https://www.ameyalambat.com/blog/swiftui-skills"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex text-sm text-gray-300 underline decoration-neutral-700 underline-offset-4 transition-colors hover:text-white"
+              >
+                Read the blog post
               </Link>
             </div>
           </section>
