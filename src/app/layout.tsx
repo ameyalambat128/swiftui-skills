@@ -5,6 +5,12 @@ import Background from "@/components/background";
 import { Providers } from "@/components/providers";
 import { cn } from "@/lib/utils";
 
+const siteUrl = "https://swiftui-skills.ameyalambat.com";
+const productName = "SwiftUI Skills";
+const productDescription =
+  "SwiftUI Skills gives AI agents Apple-authored Xcode guidance through a local-first setup so they generate more idiomatic SwiftUI with fewer hallucinated patterns.";
+const googleSiteVerification = process.env.GOOGLE_SITE_VERIFICATION;
+
 const ibmPlexSans = IBM_Plex_Sans({
   weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
@@ -13,51 +19,67 @@ const ibmPlexSans = IBM_Plex_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "/swiftui-skills - Agent Skills for SwiftUI",
-  description:
-    "Agent skills for SwiftUI, built from Apple's Xcode AI documentation. Local install. No telemetry.",
+  title: "SwiftUI Skills | Apple-authored Xcode guidance for AI agents",
+  description: productDescription,
   keywords: [
+    "SwiftUI Skills",
     "SwiftUI",
-    "AI",
-    "coding agent",
+    "AI agents",
+    "coding agents",
     "Claude Code",
     "Cursor",
+    "Codex",
     "Apple",
     "Xcode",
     "iOS",
     "macOS",
     "visionOS",
+    "local-first",
   ],
   authors: [{ name: "Ameya Lambat", url: "https://ameyalambat.com" }],
   creator: "Ameya Lambat",
-  metadataBase: new URL("https://swiftui-skills.ameyalambat.com"),
+  publisher: "Ameya Lambat",
+  metadataBase: new URL(siteUrl),
   alternates: {
     canonical: "/",
   },
+  verification: googleSiteVerification
+    ? {
+        google: googleSiteVerification,
+      }
+    : undefined,
+  icons: {
+    icon: [
+      {
+        url: "/icon.png",
+        type: "image/png",
+      },
+    ],
+    shortcut: "/icon.png",
+    apple: "/icon.png",
+  },
   openGraph: {
-    title: "/swiftui-skills - Agent Skills for SwiftUI",
-    description:
-      "Agent skills for SwiftUI, built from Apple's Xcode AI documentation.",
-    url: "https://swiftui-skills.ameyalambat.com",
-    siteName: "/swiftui-skills",
+    title: "SwiftUI Skills",
+    description: productDescription,
+    url: siteUrl,
+    siteName: productName,
     locale: "en_US",
     type: "website",
     images: [
       {
-        url: "/og-image.png",
-        width: 3549,
-        height: 2148,
-        alt: "/swiftui-skills - Agent Skills for SwiftUI",
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "SwiftUI Skills",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "/swiftui-skills - Agent Skills for SwiftUI",
-    description:
-      "Agent skills for SwiftUI, built from Apple's Xcode AI documentation.",
+    title: "SwiftUI Skills",
+    description: productDescription,
     creator: "@lambatameya",
-    images: ["/og-image.png"],
+    images: ["/twitter-image"],
   },
   robots: {
     index: true,
