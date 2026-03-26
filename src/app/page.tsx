@@ -11,30 +11,84 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+const siteUrl = "https://swiftui-skills.ameyalambat.com";
+const productDescription =
+  "SwiftUI Skills gives AI agents Apple-authored Xcode guidance through a local-first setup so they generate more idiomatic SwiftUI with fewer hallucinated patterns.";
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: siteUrl,
+      name: "SwiftUI Skills",
+      description: productDescription,
+      publisher: {
+        "@id": `${siteUrl}/#person`,
+      },
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": `${siteUrl}/#software`,
+      name: "SwiftUI Skills",
+      applicationCategory: "DeveloperApplication",
+      operatingSystem: "macOS",
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+      },
+      description: productDescription,
+      softwareVersion: "0.1.0",
+      url: siteUrl,
+      downloadUrl: `${siteUrl}/install`,
+      publisher: {
+        "@id": `${siteUrl}/#person`,
+      },
+      author: {
+        "@id": `${siteUrl}/#person`,
+      },
+      keywords: [
+        "SwiftUI",
+        "Xcode",
+        "Apple-authored guidance",
+        "AI coding agents",
+        "local-first",
+      ],
+    },
+    {
+      "@type": "Person",
+      "@id": `${siteUrl}/#person`,
+      name: "Ameya Lambat",
+      url: "https://ameyalambat.com",
+    },
+  ],
+};
+
 const faqItems = [
   {
     value: "ai-coding-agents",
     question: "What are SwiftUI skills for AI coding agents?",
     answer:
-      "/swiftui-skills packages Apple-authored guidance from Xcode into reusable skills that help AI coding agents generate more idiomatic SwiftUI. Instead of relying on generic guesses, the agent gets better context for composition, platform APIs, and the patterns Apple expects in real apps.",
+      "SwiftUI Skills packages Apple-authored guidance from Xcode into reusable local skills that help AI coding agents generate more idiomatic SwiftUI. Instead of relying on generic guesses, the agent gets better context for composition, platform APIs, and the patterns Apple expects in real apps.",
   },
   {
     value: "claude-code",
     question: "How does the SwiftUI skill for Claude Code work?",
     answer:
-      "Claude Code can use /swiftui-skills as local context during generation and refactoring. The setup flow extracts the docs from your local Xcode install, installs the skill locally, and gives Claude Code a stronger source of truth when it needs to write SwiftUI-heavy code.",
+      "Claude Code can use SwiftUI Skills as local context during generation and refactoring. The setup flow extracts the docs from your local Xcode install, installs the skill locally, and gives Claude Code a stronger source of truth when it needs to write SwiftUI-heavy code.",
   },
   {
     value: "cursor",
     question: "Can I use this SwiftUI skill for Cursor?",
     answer:
-      "Yes. The same SwiftUI skill for Cursor uses the locally extracted documentation and skill prompts to improve SwiftUI output inside your editor. The goal is the same across tools: better SwiftUI structure, fewer hallucinated APIs, and behavior that stays closer to Apple-native patterns.",
+      "Yes. The same SwiftUI Skills setup for Cursor uses locally extracted documentation and skill prompts to improve SwiftUI output inside your editor. The goal is the same across tools: better SwiftUI structure, fewer hallucinated APIs, and behavior that stays closer to Apple-native patterns.",
   },
   {
     value: "xcode-docs",
     question: "Why is this a SwiftUI coding skill from Xcode docs?",
     answer:
-      "The project is built around documentation Apple ships inside Xcode, not scraped summaries or community paraphrases. That is what makes /swiftui-skills a SwiftUI coding skill from Xcode docs: the content is extracted locally from your machine and then used to guide the agent.",
+      "The project is built around documentation Apple ships inside Xcode, not scraped summaries or community paraphrases. That is what makes SwiftUI Skills different: the content is extracted locally from your machine and then used to guide the agent.",
   },
 ];
 
@@ -51,6 +105,12 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen overflow-x-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData),
+        }}
+      />
       <div className="mx-6 max-w-4xl lg:mx-auto">
         {/* Header / Hero */}
         <header className="py-16 lg:py-24">
@@ -64,18 +124,18 @@ export default function Home() {
           <p className="mt-4 text-lg text-gray-100">
             Agent skills for SwiftUI,
             <br className="hidden sm:block" />
-            built from Apple&apos;s Xcode AI documentation.
+            grounded in the documentation Apple ships with Xcode.
           </p>
 
           <p className="mt-6 leading-relaxed text-gray-400">
-            /swiftui-skills extracts Apple-authored documentation shipped inside
+            SwiftUI Skills extracts Apple-authored documentation shipped inside
             Xcode and turns it into reusable skills that help AI agents write
             idiomatic, Apple-native SwiftUI.
           </p>
 
           {/* Installation */}
           <h2 className="mt-16 mb-4 text-xl font-bold gradient-text">
-            Installation
+            Install SwiftUI Skills
           </h2>
           <div className="px-5 py-4 font-mono text-sm rounded-lg bg-neutral-900 ring-1 ring-neutral-800">
             <p className="text-xs text-gray-500 mb-3 font-sans">Recommended</p>
@@ -132,7 +192,8 @@ export default function Home() {
             </div>
           </div>
           <p className="mt-3 text-sm text-gray-600">
-            Local install. No telemetry. No Apple documentation redistributed.
+            Local-first install. No telemetry. No Apple documentation
+            redistributed.
           </p>
           <p className="mt-2 text-sm text-gray-600">
             Works with{" "}
@@ -217,24 +278,28 @@ export default function Home() {
         <main className="space-y-12">
           <section>
             <h2 className="mb-4 text-xl font-bold gradient-text">
-              What is /swiftui-skills?
+              What is SwiftUI Skills?
             </h2>
             <p className="mb-4 leading-relaxed text-gray-400">
-              SwiftUI is opinionated. Most AI agents don&apos;t know those
-              opinions.
+              SwiftUI is opinionated. Most AI agents do not know those opinions,
+              so they default to generic patterns that feel wrong in real
+              Apple-platform apps.
             </p>
             <p className="mb-4 leading-relaxed text-gray-400">
-              /swiftui-skills is a collection of skills built from
+              SwiftUI Skills is a collection of local skills built from
               Apple-authored documentation that ships inside Xcode.
             </p>
             <p className="mb-6 leading-relaxed text-gray-400">
-              These skills condition AI agents to follow the same patterns Apple
-              expects in real SwiftUI apps.
+              These skills steer AI agents toward the same patterns Apple
+              expects in real SwiftUI apps, which means more idiomatic code,
+              fewer hallucinated APIs, and less cleanup after generation.
             </p>
             <ul className="space-y-1 list-disc list-inside text-gray-400">
-              <li>Uses Apple-written guidance from inside Xcode</li>
-              <li>Reduces hallucinations and non-idiomatic SwiftUI</li>
-              <li>Open source and local-first</li>
+              <li>
+                Uses Apple-written guidance extracted from your local Xcode
+              </li>
+              <li>Improves SwiftUI output for coding agents across editors</li>
+              <li>Open source, local-first, and no telemetry by default</li>
             </ul>
           </section>
 
@@ -245,15 +310,16 @@ export default function Home() {
               Why this exists
             </h2>
             <p className="mb-4 leading-relaxed text-gray-400">
-              AI agents struggle with SwiftUI not because the models are weak,
+              AI agents struggle with SwiftUI not because the models are weak
               but because SwiftUI encodes architectural and design decisions
               that are rarely written down in public documentation.
             </p>
             <p className="mb-4 leading-relaxed text-gray-400">
-              Apple already solved this internally.
+              Apple already ships a stronger source of truth inside Xcode.
             </p>
             <p className="leading-relaxed text-gray-400">
-              /swiftui-skills makes that guidance usable.
+              SwiftUI Skills makes that guidance usable without moving the docs
+              off your machine.
             </p>
           </section>
 
@@ -261,10 +327,10 @@ export default function Home() {
 
           <section>
             <h2 className="mb-4 text-xl font-bold gradient-text">
-              What&apos;s included
+              What the skills cover
             </h2>
             <p className="mb-4 leading-relaxed text-gray-400">
-              The current skill set covers:
+              The current SwiftUI Skills package covers:
             </p>
             <div className="grid gap-2 sm:grid-cols-2">
               {[
@@ -296,8 +362,8 @@ export default function Home() {
               How it works
             </h2>
             <p className="mb-6 leading-relaxed text-gray-400">
-              /swiftui-skills works by giving AI agents better context, not new
-              models.
+              SwiftUI Skills works by giving AI agents better context, not new
+              models or proprietary hosted infrastructure.
             </p>
             <div className="space-y-4">
               <div className="flex gap-4">
@@ -310,20 +376,21 @@ export default function Home() {
               <div className="flex gap-4">
                 <span className="text-gray-600 font-mono">2.</span>
                 <p className="text-gray-400">
-                  Skills define how agents should use that documentation
+                  Skills define how agents should use that guidance during
+                  generation and refactoring
                 </p>
               </div>
               <div className="flex gap-4">
                 <span className="text-gray-600 font-mono">3.</span>
                 <p className="text-gray-400">
-                  Your AI agent uses the docs as source of truth when writing
-                  code
+                  Your AI agent uses the docs as a local source of truth when
+                  writing code
                 </p>
               </div>
             </div>
             <p className="mt-6 text-sm text-gray-600">
               No Apple documentation is redistributed. Everything is extracted
-              locally on install.
+              locally during setup.
             </p>
           </section>
 
@@ -335,7 +402,7 @@ export default function Home() {
             </h2>
             <ul className="space-y-1 list-disc list-inside text-gray-400">
               <li>iOS developers refactoring into SwiftUI</li>
-              <li>Developers using AI to write SwiftUI-heavy apps</li>
+              <li>Teams using AI agents to write SwiftUI-heavy apps</li>
               <li>
                 People working with App Intents, StoreKit, Widgets, or visionOS
               </li>
@@ -352,7 +419,7 @@ export default function Home() {
               Open source
             </h2>
             <p className="mb-4 leading-relaxed text-gray-400">
-              /swiftui-skills is open source.
+              SwiftUI Skills is open source.
             </p>
             <p className="mb-4 leading-relaxed text-gray-400">
               The skill definitions, prompts, and installer are public. Apple
@@ -389,8 +456,9 @@ export default function Home() {
               SwiftUI skills FAQ
             </h2>
             <p className="mb-6 max-w-2xl leading-relaxed text-gray-400">
-              A short reference for people looking for SwiftUI skills for AI
-              coding agents, including setup for Claude Code and Cursor.
+              A short reference for teams looking for SwiftUI Skills and a
+              better setup for AI coding agents, including Claude Code and
+              Cursor.
             </p>
             <div className="rounded-2xl border border-neutral-800 bg-neutral-950/60 px-5 py-3 ring-1 ring-neutral-900">
               <Accordion type="single" collapsible className="w-full">
@@ -430,7 +498,8 @@ export default function Home() {
           <section>
             <h2 className="mb-4 text-xl font-bold gradient-text">Status</h2>
             <p className="leading-relaxed text-gray-400">
-              Early and evolving. Expect changes as Apple updates Xcode.
+              Early and evolving. Expect the package to track new Apple platform
+              guidance as Xcode changes.
             </p>
           </section>
         </main>
