@@ -67,9 +67,9 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/opengraph-image",
-        width: 1200,
-        height: 630,
+        url: "/og-image.png",
+        width: 3549,
+        height: 2148,
         alt: "SwiftUI Skills",
       },
     ],
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
     title: "SwiftUI Skills",
     description: productDescription,
     creator: "@lambatameya",
-    images: ["/twitter-image"],
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
