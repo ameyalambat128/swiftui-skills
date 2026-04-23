@@ -43,6 +43,14 @@ if [ -d "$CODEX_DIR" ]; then
     TOOLS_REMOVED=$((TOOLS_REMOVED + 1))
 fi
 
+# Remove from OpenClaw
+OPENCLAW_DIR="$HOME/.openclaw/skills/$SKILL_NAME"
+if [ -d "$OPENCLAW_DIR" ]; then
+    rm -rf "$OPENCLAW_DIR"
+    print_success "OpenClaw: removed"
+    TOOLS_REMOVED=$((TOOLS_REMOVED + 1))
+fi
+
 # Remove from OpenCode
 OPENCODE_DIR="$HOME/.config/opencode/skill/$SKILL_NAME"
 if [ -d "$OPENCODE_DIR" ]; then

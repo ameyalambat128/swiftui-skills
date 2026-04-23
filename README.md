@@ -4,13 +4,13 @@ Apple-authored SwiftUI and Apple platform guidance, packaged as skills for AI co
 
 ## What is this?
 
-SwiftUI is opinionated. Most AI agents don't know those opinions.
+SwiftUI is opinionated. Most AI agents do not know those opinions.
 
-/swiftui-skills extracts internal Apple documentation shipped inside Xcode and turns it into reusable skills that help AI agents write idiomatic, Apple-native SwiftUI code.
+`/swiftui-skills` extracts internal Apple documentation shipped inside Xcode and turns it into reusable skills that help AI agents write idiomatic, Apple-native SwiftUI code.
 
 - Uses Apple-written guidance from inside Xcode
 - Reduces hallucinated or non-idiomatic SwiftUI
-- Works with Claude Code, Cursor, and similar tools
+- Works with Claude Code, Cursor, Codex, OpenClaw, and similar tools
 - Open source and local-first
 
 ## Installation
@@ -21,33 +21,58 @@ SwiftUI is opinionated. Most AI agents don't know those opinions.
 curl -fsSL https://swiftui-skills.ameyalambat.com/install | bash
 ```
 
-### Advanced: Using npx skills
+The installer extracts local Xcode docs and installs the skill into detected runtimes, including OpenClaw shared installs at `~/.openclaw/skills/swiftui-skills`.
+
+### Using `npx skills`
 
 ```bash
 npx skills add ameyalambat128/swiftui-skills
 ```
 
-Choose the install scope in the `skills` TUI, and keep `Symlink (Recommended)` selected.
+Choose the install scope in the `skills` TUI and keep `Symlink (Recommended)` selected.
 
-#### Global install
+#### Shared agent install
 
 ```bash
 ~/.agents/skills/swiftui-skills/setup.sh
 ```
 
-#### Project-local install
+#### Project-local agent install
 
 ```bash
 ./.agents/skills/swiftui-skills/setup.sh
 ```
 
-The first command installs the skill. The setup command extracts Apple documentation from your local Xcode installation.
-Agent-specific placement like Claude Code is handled by the `skills` CLI, so no extra Claude-specific step is needed in the interactive flow.
+### OpenClaw manual install
+
+OpenClaw can load the same canonical skill package from any of these paths:
+
+- `~/.agents/skills/swiftui-skills`
+- `~/.openclaw/skills/swiftui-skills`
+- `<workspace>/skills/swiftui-skills`
+
+For a shared OpenClaw install:
+
+```bash
+mkdir -p ~/.openclaw/skills
+cp -R src/skill ~/.openclaw/skills/swiftui-skills
+~/.openclaw/skills/swiftui-skills/setup.sh
+```
+
+For a workspace-local OpenClaw install:
+
+```bash
+mkdir -p ./skills
+cp -R src/skill ./skills/swiftui-skills
+./skills/swiftui-skills/setup.sh
+```
+
+After setup, start a new OpenClaw session or restart the gateway.
 
 ### Requirements
 
 - macOS
-- Xcode 26 or later (the documentation lives inside Xcode)
+- Xcode 26 or later
 
 ### Custom paths
 
@@ -63,11 +88,24 @@ If Xcode is installed in a non-standard location:
 
 ## How it works
 
-1. The installer extracts Apple documentation from your local Xcode install
-2. Skills define how agents should use that documentation
-3. Your AI agent uses the docs as source of truth when writing code
+1. The installer extracts Apple documentation from your local Xcode install.
+2. The skill tells the agent how to use that documentation during generation and review.
+3. Your agent uses the extracted docs as source of truth when writing SwiftUI code.
 
-No Apple documentation is redistributed. Everything is extracted locally on install.
+No Apple documentation is redistributed. Everything is extracted locally during setup.
+
+## What "supports OpenClaw" means
+
+This project is still a developer-focused SwiftUI skill.
+
+OpenClaw support means:
+
+- The canonical `SKILL.md` is compatible with OpenClaw skill loading.
+- The same skill package can live in OpenClaw-visible paths like `~/.agents/skills`, `~/.openclaw/skills`, or `<workspace>/skills`.
+- OpenClaw users get the same local-docs workflow after running `setup.sh`.
+- OpenClaw users can verify the skill with native commands like `openclaw skills list`.
+
+This does not add a plugin, split the package, or change the product into an OpenClaw-only tool.
 
 ## What's included
 
@@ -86,40 +124,60 @@ Documentation extracted from Xcode covers:
 
 ## Usage
 
-### Claude Code
+### Claude Code and similar agents
 
-The custom installer automatically links the skill to `~/.claude/skills/` when Claude Code is detected. The skill is available immediately.
+The installer can place the skill directly into detected agent paths like `~/.claude/skills`, `~/.codex/skills`, and related runtimes.
 
-### Cursor
+### OpenClaw
 
-Add the skill path to your Cursor configuration:
+OpenClaw already loads visible skills from these paths, in precedence order:
 
+1. `<workspace>/skills`
+2. `<workspace>/.agents/skills`
+3. `~/.agents/skills`
+4. `~/.openclaw/skills`
+
+To verify the skill is visible:
+
+```bash
+openclaw skills list
 ```
-~/.swiftui-skills/
+
+Then start a new session and try a representative SwiftUI task:
+
+```bash
+openclaw agent --message "Build a SwiftUI settings screen with a toolbar and explain which local docs you used."
 ```
+
+Expected smoke-test behavior:
+
+- The skill is listed by OpenClaw.
+- The agent references local extracted docs instead of inventing APIs.
+- If `docs/` is empty, the agent tells you to run `setup.sh` before proceeding.
 
 ## Project structure
 
-```
+```text
 swiftui-skills/
 ├── src/
 │   ├── app/                    # Next.js website
 │   ├── skill/                  # Skill package
-│   │   ├── skill.md            # Agent contract
-│   │   ├── manifest.json       # Tool compatibility
-│   │   ├── prompts/            # System, router, reviewer, generator, refactorer
-│   │   └── docs/               # Populated by installer
+│   │   ├── SKILL.md           # Canonical skill contract
+│   │   ├── manifest.json      # Tool compatibility helpers
+│   │   ├── prompts/           # System, router, reviewer, generator, refactorer
+│   │   ├── docs/              # Populated by setup
+│   │   └── setup.sh           # Local Xcode docs extraction
 │   └── scripts/
 │       ├── install.sh
 │       └── uninstall.sh
 └── public/
-    └── install                 # curl target
+    └── install                # curl target
 ```
 
 ## Uninstall
 
 ```bash
-~/.swiftui-skills/scripts/uninstall.sh
+bash src/scripts/uninstall.sh
 ```
 
 ## Who this is for

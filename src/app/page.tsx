@@ -85,6 +85,12 @@ const faqItems = [
       "Yes. The same SwiftUI Skills setup for Cursor uses locally extracted documentation and skill prompts to improve SwiftUI output inside your editor. The goal is the same across tools: better SwiftUI structure, fewer hallucinated APIs, and behavior that stays closer to Apple-native patterns.",
   },
   {
+    value: "openclaw",
+    question: "Does SwiftUI Skills support OpenClaw?",
+    answer:
+      "Yes. SwiftUI Skills now supports OpenClaw as an additional runtime. The same canonical skill package can live in OpenClaw-visible paths like ~/.agents/skills, ~/.openclaw/skills, or a workspace skills folder, and it keeps the same local Xcode docs workflow after setup.",
+  },
+  {
     value: "xcode-docs",
     question: "Why is this a SwiftUI coding skill from Xcode docs?",
     answer:
@@ -99,9 +105,12 @@ function Divider() {
 export default function Home() {
   const npxCommand = "npx skills add ameyalambat128/swiftui-skills";
   const globalSetupCommand = "~/.agents/skills/swiftui-skills/setup.sh";
+  const openClawSetupCommand = "~/.openclaw/skills/swiftui-skills/setup.sh";
+  const openClawWorkspaceCommand = "./skills/swiftui-skills/setup.sh";
   const localSetupCommand = "./.agents/skills/swiftui-skills/setup.sh";
   const curlCommand =
     "curl -fsSL https://swiftui-skills.ameyalambat.com/install | bash";
+  const openClawListCommand = "openclaw skills list";
 
   return (
     <div className="relative min-h-screen overflow-x-hidden">
@@ -131,6 +140,9 @@ export default function Home() {
             SwiftUI Skills extracts Apple-authored documentation shipped inside
             Xcode and turns it into reusable skills that help AI agents write
             idiomatic, Apple-native SwiftUI.
+          </p>
+          <p className="mt-4 text-sm text-gray-500">
+            Now supports OpenClaw as well, with the same local-docs workflow.
           </p>
 
           {/* Installation */}
@@ -175,6 +187,18 @@ export default function Home() {
               </div>
               <div>
                 <p className="text-xs text-gray-500 mb-2 font-sans">
+                  OpenClaw shared install
+                </p>
+                <div className="flex gap-4 justify-between items-center">
+                  <div className="text-gray-400 overflow-x-auto">
+                    <span className="select-none text-gray-600">$ </span>
+                    {openClawSetupCommand}
+                  </div>
+                  <CopyButton text={openClawSetupCommand} />
+                </div>
+              </div>
+              <div>
+                <p className="text-xs text-gray-500 mb-2 font-sans">
                   Project-local install
                 </p>
                 <div className="flex gap-4 justify-between items-center">
@@ -183,6 +207,18 @@ export default function Home() {
                     {localSetupCommand}
                   </div>
                   <CopyButton text={localSetupCommand} />
+                </div>
+              </div>
+              <div>
+                <p className="text-xs text-gray-500 mb-2 font-sans">
+                  OpenClaw workspace install
+                </p>
+                <div className="flex gap-4 justify-between items-center">
+                  <div className="text-gray-400 overflow-x-auto">
+                    <span className="select-none text-gray-600">$ </span>
+                    {openClawWorkspaceCommand}
+                  </div>
+                  <CopyButton text={openClawWorkspaceCommand} />
                 </div>
               </div>
             </div>
@@ -222,6 +258,15 @@ export default function Home() {
               className="text-gray-400 underline hover:text-white"
             >
               Codex
+            </Link>
+            ,{" "}
+            <Link
+              href="https://docs.openclaw.ai/tools/skills"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 underline hover:text-white"
+            >
+              OpenClaw
             </Link>
             ,{" "}
             <Link
@@ -276,6 +321,39 @@ export default function Home() {
 
         {/* Main Content */}
         <main className="space-y-12">
+          <section>
+            <h2 className="mb-4 text-xl font-bold gradient-text">
+              OpenClaw support
+            </h2>
+            <p className="mb-4 leading-relaxed text-gray-400">
+              SwiftUI Skills remains a developer-focused SwiftUI skill. OpenClaw
+              support is additive: same package, same local-docs workflow, one
+              more runtime.
+            </p>
+            <p className="mb-4 leading-relaxed text-gray-400">
+              OpenClaw can load the skill from shared agent installs, OpenClaw
+              shared installs, or workspace-local `skills/` folders.
+            </p>
+            <div className="rounded-2xl border border-neutral-800 bg-neutral-950/60 p-5 ring-1 ring-neutral-900">
+              <p className="text-xs uppercase tracking-[0.22em] text-gray-500">
+                Verify in OpenClaw
+              </p>
+              <div className="mt-3 flex gap-4 justify-between items-center">
+                <div className="text-sm font-mono text-gray-400 overflow-x-auto">
+                  <span className="select-none text-gray-600">$ </span>
+                  {openClawListCommand}
+                </div>
+                <CopyButton text={openClawListCommand} />
+              </div>
+              <p className="mt-3 text-sm leading-relaxed text-gray-500">
+                Start a new session after setup, then ask for a SwiftUI task and
+                confirm the agent grounds itself in local extracted docs.
+              </p>
+            </div>
+          </section>
+
+          <Divider />
+
           <section>
             <h2 className="mb-4 text-xl font-bold gradient-text">
               What is SwiftUI Skills?
@@ -457,8 +535,8 @@ export default function Home() {
             </h2>
             <p className="mb-6 max-w-2xl leading-relaxed text-gray-400">
               A short reference for teams looking for SwiftUI Skills and a
-              better setup for AI coding agents, including Claude Code and
-              Cursor.
+              better setup for AI coding agents, including Claude Code,
+              OpenClaw, and Cursor.
             </p>
             <div className="rounded-2xl border border-neutral-800 bg-neutral-950/60 px-5 py-3 ring-1 ring-neutral-900">
               <Accordion type="single" collapsible className="w-full">
