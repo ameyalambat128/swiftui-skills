@@ -6,19 +6,13 @@ import { GitHubIcon, StarIcon } from "@/components/icons";
 
 async function fetchGitHubStars(username: string, repo: string) {
   const response = await fetch(
-    `/api/github-stars?username=${username}&repo=${repo}`
+    `/api/github-stars?username=${username}&repo=${repo}`,
   );
   const data = (await response.json()) as { stars: number };
   return data.stars;
 }
 
-function GitHubStars({
-  username,
-  repo,
-}: {
-  username: string;
-  repo: string;
-}) {
+function GitHubStars({ username, repo }: { username: string; repo: string }) {
   const { data: stars } = useQuery({
     queryKey: ["github-stars", username, repo],
     queryFn: () => fetchGitHubStars(username, repo),

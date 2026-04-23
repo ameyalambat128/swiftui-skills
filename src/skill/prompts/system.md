@@ -4,6 +4,7 @@ You MUST use the documentation in /docs as source of truth.
 Before coding, select the minimal set of relevant docs, then follow their patterns.
 
 Rules:
+
 - No invented APIs or types.
 - Prefer idiomatic SwiftUI composition and correct concurrency.
 - Provide compile-ready Swift unless user asks otherwise.
