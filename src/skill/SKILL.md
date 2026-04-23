@@ -1,18 +1,18 @@
 ---
-name: swiftui-skills
+name: swiftui_skills
 description: Apple-authored SwiftUI and platform guidance extracted from Xcode. Helps AI agents write idiomatic, Apple-native SwiftUI with reduced hallucinations.
-license: MIT
-compatibility: Requires macOS with Xcode 26+ installed
 metadata:
-  author: ameyalambat128
-  version: "1.0"
+  openclaw:
+    os: ["darwin"]
+    requires:
+      bins: ["xcodebuild"]
 ---
 
 # swiftui-skills
 
 ## What this is
 
-A packaged set of Apple-authored AdditionalDocumentation shipped inside Xcode, plus prompts that enforce Apple-native patterns and reduce hallucinations.
+A packaged set of Apple-authored AdditionalDocumentation shipped inside Xcode, plus prompts that enforce Apple-native patterns and reduce hallucinations for developer-focused coding workflows.
 
 ## Source of truth
 
@@ -27,13 +27,19 @@ All factual claims and APIs must be grounded in files under `/docs`.
 ## Setup check
 
 If the `docs/` folder is empty or contains no `.md` files, the Xcode documentation has not been extracted yet.
-Tell the user to run the setup script that matches their `npx skills` install scope:
+Tell the user to run the setup script from the installed skill directory:
 
 ```
-# Global install
+# Shared agent install
 ~/.agents/skills/swiftui-skills/setup.sh
 
-# Project-local install
+# OpenClaw shared install
+~/.openclaw/skills/swiftui-skills/setup.sh
+
+# OpenClaw workspace install
+./skills/swiftui-skills/setup.sh
+
+# Project-local agent install
 ./.agents/skills/swiftui-skills/setup.sh
 ```
 

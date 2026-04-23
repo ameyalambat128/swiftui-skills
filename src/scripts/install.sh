@@ -301,6 +301,9 @@ fi
 if [ -d "$HOME/.codex" ]; then
     DETECTED_AGENTS+=("Codex")
 fi
+if command -v openclaw >/dev/null 2>&1 || [ -d "$HOME/.openclaw" ]; then
+    DETECTED_AGENTS+=("OpenClaw")
+fi
 if command -v opencode >/dev/null 2>&1 || [ -d "$HOME/.config/opencode" ]; then
     DETECTED_AGENTS+=("OpenCode")
 fi
@@ -350,6 +353,14 @@ if [ -d "$HOME/.codex" ]; then
     INSTALLED_PATHS+=("~/.codex/skills/$SKILL_NAME")
 fi
 
+if command -v openclaw >/dev/null 2>&1 || [ -d "$HOME/.openclaw" ]; then
+    OPENCLAW_DIR="$HOME/.openclaw/skills/$SKILL_NAME"
+    rm -rf "$OPENCLAW_DIR"
+    mkdir -p "$OPENCLAW_DIR"
+    cp -R "$TMP_DIR/"* "$OPENCLAW_DIR/"
+    INSTALLED_PATHS+=("~/.openclaw/skills/$SKILL_NAME")
+fi
+
 if command -v opencode >/dev/null 2>&1 || [ -d "$HOME/.config/opencode" ]; then
     OPENCODE_DIR="$HOME/.config/opencode/skill/$SKILL_NAME"
     rm -rf "$OPENCODE_DIR"
@@ -388,7 +399,8 @@ echo "│                                                                   │"
 
 if [ ${#INSTALLED_PATHS[@]} -eq 0 ]; then
     echo "│  No agents detected. Install an agent first:                      │"
-    echo "│  Claude Code, Cursor, Codex, OpenCode, Windsurf, or Gemini CLI    │"
+    echo "│  Claude Code, Cursor, Codex, OpenClaw, OpenCode, Windsurf, or     │"
+    echo "│  Gemini CLI                                                       │"
 else
     for path in "${INSTALLED_PATHS[@]}"; do
         printf "│  ${GREEN}✓${NC} %-60s │\n" "$path"
