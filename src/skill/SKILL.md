@@ -1,5 +1,5 @@
 ---
-name: swiftui_skills
+name: swiftui-skills
 description: Apple-authored SwiftUI and platform guidance extracted from Xcode. Helps AI agents write idiomatic, Apple-native SwiftUI with reduced hallucinations.
 metadata:
   openclaw:
