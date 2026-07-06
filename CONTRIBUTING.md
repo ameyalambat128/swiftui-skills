@@ -28,10 +28,11 @@ git clone https://github.com/YOUR_USERNAME/swiftui-skills.git
 cd swiftui-skills
 
 # Install dependencies (for the landing page)
-npm install
+bun install
 
-# Run the dev server
-npm run dev
+# Check formatting and buildability
+bun run format
+bun run check
 
 # Test the installer locally
 bash src/scripts/install.sh
@@ -41,13 +42,14 @@ bash src/scripts/install.sh
 
 ```
 swiftui-skills/
+├── .claude-plugin/    # Claude Code plugin manifest
+├── .codex-plugin/     # Codex plugin manifest
+├── .cursor-plugin/    # Cursor plugin manifest
+├── skills/
+│   └── swiftui-skills # Canonical shared skill payload
 ├── src/
 │   ├── app/           # Next.js landing page
 │   ├── scripts/       # Install/uninstall scripts
-│   └── skill/         # Skill definition and prompts
-│       ├── SKILL.md   # Main skill file
-│       ├── manifest.json
-│       └── prompts/   # AI prompts
 ├── public/
 │   └── install        # Web-served installer
 └── ...
@@ -57,6 +59,7 @@ swiftui-skills/
 
 - Keep changes focused and atomic
 - Follow existing code style
+- Run `bun run format` and `bun run check` before submitting
 - Test the installer on your machine before submitting
 - Do not commit any Apple documentation (it's extracted locally)
 

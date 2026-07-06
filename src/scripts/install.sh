@@ -249,13 +249,19 @@ trap cleanup EXIT
 print_step "Downloading skill files..."
 REPO_RAW="https://raw.githubusercontent.com/ameyalambat128/swiftui-skills/main"
 
-curl -fsSL "$REPO_RAW/src/skill/SKILL.md" -o "$TMP_DIR/SKILL.md"
-curl -fsSL "$REPO_RAW/src/skill/manifest.json" -o "$TMP_DIR/manifest.json"
+curl -fsSL "$REPO_RAW/skills/swiftui-skills/SKILL.md" -o "$TMP_DIR/SKILL.md"
+curl -fsSL "$REPO_RAW/skills/swiftui-skills/manifest.json" -o "$TMP_DIR/manifest.json"
+curl -fsSL "$REPO_RAW/skills/swiftui-skills/setup.sh" -o "$TMP_DIR/setup.sh"
+curl -fsSL "$REPO_RAW/skills/swiftui-skills/CHANGELOG.md" -o "$TMP_DIR/CHANGELOG.md"
+curl -fsSL "$REPO_RAW/skills/swiftui-skills/VERSION" -o "$TMP_DIR/VERSION"
+chmod +x "$TMP_DIR/setup.sh"
 
 mkdir -p "$TMP_DIR/prompts"
 for prompt in system router reviewer generator refactorer; do
-    curl -fsSL "$REPO_RAW/src/skill/prompts/${prompt}.md" -o "$TMP_DIR/prompts/${prompt}.md" 2>/dev/null || true
+    curl -fsSL "$REPO_RAW/skills/swiftui-skills/prompts/${prompt}.md" -o "$TMP_DIR/prompts/${prompt}.md" 2>/dev/null || true
 done
+
+mkdir -p "$TMP_DIR/examples"
 
 print_line
 
