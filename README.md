@@ -11,11 +11,15 @@ SwiftUI is opinionated. Most AI agents do not know those opinions.
 - Uses Apple-written guidance from inside Xcode
 - Reduces hallucinated or non-idiomatic SwiftUI
 - Works with Claude Code, Cursor, Codex, OpenClaw, and similar tools
+- Ships native plugin manifests for Claude Code, Cursor, and Codex
 - Open source and local-first
 
 ## Installation
 
-### Using curl (Recommended)
+Installation differs a bit by harness. If you use more than one, keep the
+shared payload the same and choose the install surface that fits that tool.
+
+### Direct install (Recommended)
 
 ```bash
 curl -fsSL https://swiftui-skills.ameyalambat.com/install | bash
@@ -23,7 +27,7 @@ curl -fsSL https://swiftui-skills.ameyalambat.com/install | bash
 
 The installer extracts local Xcode docs and installs the skill into detected runtimes, including OpenClaw shared installs at `~/.openclaw/skills/swiftui-skills`.
 
-### Using `npx skills`
+You can also use the skills TUI:
 
 ```bash
 npx skills add ameyalambat128/swiftui-skills
@@ -43,6 +47,33 @@ Choose the install scope in the `skills` TUI and keep `Symlink (Recommended)` se
 ./.agents/skills/swiftui-skills/setup.sh
 ```
 
+### Claude Code
+
+This repo ships a native Claude Code plugin manifest at `./.claude-plugin/plugin.json`.
+
+For local plugin testing, symlink the repo into a Claude skills directory and start a new session:
+
+```bash
+ln -s /absolute/path/to/swiftui-skills ~/.claude/skills/swiftui-skills-plugin
+```
+
+### Cursor
+
+This repo ships a native Cursor plugin manifest at `./.cursor-plugin/plugin.json`.
+
+For local plugin testing, symlink the repo into Cursor's local plugins directory and reload the window:
+
+```bash
+mkdir -p ~/.cursor/plugins/local
+ln -s /absolute/path/to/swiftui-skills ~/.cursor/plugins/local/swiftui-skills
+```
+
+### Codex
+
+This repo ships a native Codex plugin manifest at `./.codex-plugin/plugin.json`.
+
+Codex plugin packaging is included here so the repo is plugin-ready, but marketplace distribution is still optional. The direct skill install remains the simpler path today.
+
 ### OpenClaw manual install
 
 OpenClaw can load the same canonical skill package from any of these paths:
@@ -55,7 +86,7 @@ For a shared OpenClaw install:
 
 ```bash
 mkdir -p ~/.openclaw/skills
-cp -R src/skill ~/.openclaw/skills/swiftui-skills
+cp -R skills/swiftui-skills ~/.openclaw/skills/swiftui-skills
 ~/.openclaw/skills/swiftui-skills/setup.sh
 ```
 
@@ -63,7 +94,7 @@ For a workspace-local OpenClaw install:
 
 ```bash
 mkdir -p ./skills
-cp -R src/skill ./skills/swiftui-skills
+cp -R skills/swiftui-skills ./skills/swiftui-skills
 ./skills/swiftui-skills/setup.sh
 ```
 
@@ -80,10 +111,10 @@ If Xcode is installed in a non-standard location:
 
 ```bash
 # Custom Xcode location
-./install.sh --xcode-path /Applications/Xcode-beta.app
+bash src/scripts/install.sh --xcode-path /Applications/Xcode-beta.app
 
 # Direct path to docs folder
-./install.sh --docs-path /path/to/AdditionalDocumentation
+bash src/scripts/install.sh --docs-path /path/to/AdditionalDocumentation
 ```
 
 ## How it works
@@ -128,6 +159,8 @@ Documentation extracted from Xcode covers:
 
 The installer can place the skill directly into detected agent paths like `~/.claude/skills`, `~/.codex/skills`, and related runtimes.
 
+The repo root also carries native plugin manifests for Claude Code, Cursor, and Codex, while the canonical skill payload now lives at `skills/swiftui-skills/`.
+
 ### OpenClaw
 
 OpenClaw already loads visible skills from these paths, in precedence order:
@@ -159,14 +192,21 @@ Expected smoke-test behavior:
 
 ```text
 swiftui-skills/
+├── .claude-plugin/
+│   └── plugin.json            # Claude Code plugin manifest
+├── .codex-plugin/
+│   └── plugin.json            # Codex plugin manifest
+├── .cursor-plugin/
+│   └── plugin.json            # Cursor plugin manifest
+├── skills/
+│   └── swiftui-skills/        # Canonical shared skill payload
+│       ├── SKILL.md           # Canonical skill contract
+│       ├── manifest.json      # Tool compatibility helpers
+│       ├── prompts/           # System, router, reviewer, generator, refactorer
+│       ├── docs/              # Populated by setup
+│       └── setup.sh           # Local Xcode docs extraction
 ├── src/
-│   ├── app/                    # Next.js website
-│   ├── skill/                  # Skill package
-│   │   ├── SKILL.md           # Canonical skill contract
-│   │   ├── manifest.json      # Tool compatibility helpers
-│   │   ├── prompts/           # System, router, reviewer, generator, refactorer
-│   │   ├── docs/              # Populated by setup
-│   │   └── setup.sh           # Local Xcode docs extraction
+│   ├── app/                   # Next.js website
 │   └── scripts/
 │       ├── install.sh
 │       └── uninstall.sh
