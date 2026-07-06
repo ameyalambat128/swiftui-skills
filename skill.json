@@ -5,7 +5,7 @@
   "author": "ameyalambat128",
   "license": "MIT",
   "repository": "https://github.com/ameyalambat128/swiftui-skills",
-  "main": "src/skill/SKILL.md",
+  "main": "skills/swiftui-skills/SKILL.md",
   "scripts": {
     "install": "bash src/scripts/install.sh"
   }
