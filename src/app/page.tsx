@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { GitHubStars } from "@/components/github-stars";
 import { CopyButton } from "@/components/copy-button";
+import { InstallCard } from "@/components/install-card";
 import { GitHubIcon, XIcon } from "@/components/icons";
 import {
   Accordion,
@@ -103,13 +104,6 @@ function Divider() {
 }
 
 export default function Home() {
-  const npxCommand = "npx skills add ameyalambat128/swiftui-skills";
-  const globalSetupCommand = "~/.agents/skills/swiftui-skills/setup.sh";
-  const openClawSetupCommand = "~/.openclaw/skills/swiftui-skills/setup.sh";
-  const openClawWorkspaceCommand = "./skills/swiftui-skills/setup.sh";
-  const localSetupCommand = "./.agents/skills/swiftui-skills/setup.sh";
-  const curlCommand =
-    "curl -fsSL https://swiftui-skills.ameyalambat.com/install | bash";
   const openClawListCommand = "openclaw skills list";
 
   return (
@@ -149,84 +143,7 @@ export default function Home() {
           <h2 className="mt-16 mb-4 text-xl font-bold gradient-text">
             Install SwiftUI Skills
           </h2>
-          <div className="px-5 py-4 font-mono text-sm rounded-lg bg-neutral-900 ring-1 ring-neutral-800">
-            <p className="text-xs text-gray-500 mb-3 font-sans">Recommended</p>
-            <div className="flex gap-4 justify-between items-center">
-              <div className="text-gray-400 overflow-x-auto">
-                <span className="select-none text-gray-600">$ </span>
-                {curlCommand}
-              </div>
-              <CopyButton text={curlCommand} />
-            </div>
-            <p className="text-xs text-gray-500 mt-4 mb-3 font-sans">
-              Or use npx skills
-            </p>
-            <div className="flex gap-4 justify-between items-center">
-              <div className="text-gray-400 overflow-x-auto">
-                <span className="select-none text-gray-600">$ </span>
-                {npxCommand}
-              </div>
-              <CopyButton text={npxCommand} />
-            </div>
-            <p className="text-xs text-gray-500 mt-2 font-sans">
-              Choose Global or Project in the skills TUI, and keep Symlink
-              (Recommended) selected.
-            </p>
-            <div className="mt-4 space-y-3">
-              <div>
-                <p className="text-xs text-gray-500 mb-2 font-sans">
-                  Global install
-                </p>
-                <div className="flex gap-4 justify-between items-center">
-                  <div className="text-gray-400 overflow-x-auto">
-                    <span className="select-none text-gray-600">$ </span>
-                    {globalSetupCommand}
-                  </div>
-                  <CopyButton text={globalSetupCommand} />
-                </div>
-              </div>
-              <div>
-                <p className="text-xs text-gray-500 mb-2 font-sans">
-                  OpenClaw shared install
-                </p>
-                <div className="flex gap-4 justify-between items-center">
-                  <div className="text-gray-400 overflow-x-auto">
-                    <span className="select-none text-gray-600">$ </span>
-                    {openClawSetupCommand}
-                  </div>
-                  <CopyButton text={openClawSetupCommand} />
-                </div>
-              </div>
-              <div>
-                <p className="text-xs text-gray-500 mb-2 font-sans">
-                  Project-local install
-                </p>
-                <div className="flex gap-4 justify-between items-center">
-                  <div className="text-gray-400 overflow-x-auto">
-                    <span className="select-none text-gray-600">$ </span>
-                    {localSetupCommand}
-                  </div>
-                  <CopyButton text={localSetupCommand} />
-                </div>
-              </div>
-              <div>
-                <p className="text-xs text-gray-500 mb-2 font-sans">
-                  OpenClaw workspace install
-                </p>
-                <div className="flex gap-4 justify-between items-center">
-                  <div className="text-gray-400 overflow-x-auto">
-                    <span className="select-none text-gray-600">$ </span>
-                    {openClawWorkspaceCommand}
-                  </div>
-                  <CopyButton text={openClawWorkspaceCommand} />
-                </div>
-              </div>
-            </div>
-            <div className="pt-4 mt-4 border-t border-neutral-800 text-gray-500">
-              <span className="select-none text-gray-600">&gt; </span>
-              /swiftui-skills
-            </div>
-          </div>
+          <InstallCard />
           <p className="mt-3 text-sm text-gray-600">
             Local-first install. No telemetry. No Apple documentation
             redistributed.
@@ -334,18 +251,18 @@ export default function Home() {
               OpenClaw can load the skill from shared agent installs, OpenClaw
               shared installs, or workspace-local `skills/` folders.
             </p>
-            <div className="rounded-2xl border border-neutral-800 bg-neutral-950/60 p-5 ring-1 ring-neutral-900">
-              <p className="text-xs uppercase tracking-[0.22em] text-gray-500">
+            <div className="px-5 py-4 font-mono text-sm rounded-lg bg-neutral-900 ring-1 ring-neutral-800">
+              <p className="text-xs text-gray-500 mb-3 font-sans">
                 Verify in OpenClaw
               </p>
-              <div className="mt-3 flex gap-4 justify-between items-center">
-                <div className="text-sm font-mono text-gray-400 overflow-x-auto">
+              <div className="flex gap-4 justify-between items-center">
+                <div className="text-gray-400 overflow-x-auto">
                   <span className="select-none text-gray-600">$ </span>
                   {openClawListCommand}
                 </div>
                 <CopyButton text={openClawListCommand} />
               </div>
-              <p className="mt-3 text-sm leading-relaxed text-gray-500">
+              <p className="text-xs text-gray-500 mt-4 font-sans">
                 Start a new session after setup, then ask for a SwiftUI task and
                 confirm the agent grounds itself in local extracted docs.
               </p>
@@ -553,7 +470,7 @@ export default function Home() {
               </Accordion>
             </div>
             <div className="mt-6 rounded-2xl border border-neutral-800 bg-neutral-950/60 p-5 ring-1 ring-neutral-900">
-              <p className="text-xs uppercase tracking-[0.22em] text-gray-500">
+              <p className="text-xs uppercase tracking-normal text-gray-500">
                 More context
               </p>
               <p className="mt-3 max-w-2xl leading-relaxed text-gray-400">
